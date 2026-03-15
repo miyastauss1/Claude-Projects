@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dupe or Dud — by Miya</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    /* ─── Reset & Base ─── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream:      #f9f6f1;
+      --parchment:  #f0ebe2;
+      --stone:      #e5dfd5;
+      --warm-gray:  #9c9488;
+      --charcoal:   #2c2825;
+      --ink:        #1a1714;
+      --accent:     #c17b5c;       /* terracotta — the one accent */
+      --accent-lt:  #f0ddd3;
+      --approved:   #3d6b4f;
+      --approved-lt:#e4f0e8;
+      --dud:        #8b3a3a;
+      --dud-lt:     #f5e4e4;
+      --card-bg:    #ffffff;
+      --border:     #e0d9cf;
+
+      --radius-sm:  6px;
+      --radius-md:  12px;
+      --radius-lg:  20px;
+      --shadow:     0 2px 16px rgba(44,40,37,.07), 0 1px 4px rgba(44,40,37,.05);
+      --shadow-hover: 0 8px 40px rgba(44,40,37,.12), 0 2px 8px rgba(44,40,37,.07);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--cream);
+      color: var(--charcoal);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── Header ─── */
+    header {
+      background: var(--card-bg);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+
+    .site-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--ink);
+      letter-spacing: 0.02em;
+    }
+
+    .site-logo span {
+      color: var(--accent);
+    }
+
+    .header-tag {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--warm-gray);
+    }
+
+    /* ─── Hero ─── */
+    .hero {
+      text-align: center;
+      padding: 5rem 2rem 3.5rem;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .hero-eyebrow {
+      display: inline-block;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: var(--accent-lt);
+      padding: 0.35em 1em;
+      border-radius: 100px;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 5vw, 4.2rem);
+      line-height: 1.1;
+      color: var(--ink);
+      margin-bottom: 1.25rem;
+      letter-spacing: -0.01em;
+    }
+
+    .hero h1 em {
+      color: var(--accent);
+      font-style: italic;
+    }
+
+    .hero p {
+      font-size: 1.05rem;
+      line-height: 1.75;
+      color: var(--warm-gray);
+      font-weight: 300;
+      max-width: 540px;
+      margin: 0 auto;
+    }
+
+    /* ─── Divider ─── */
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      max-width: 1200px;
+      margin: 0 auto 0.5rem;
+      padding: 0 2rem;
+    }
+    .divider-line { flex: 1; height: 1px; background: var(--border); }
+    .divider-label {
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--warm-gray);
+      white-space: nowrap;
+    }
+
+    /* ─── Main layout ─── */
+    main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem 6rem;
+    }
+
+    /* ─── Comparison pair ─── */
+    .comparison {
+      margin-bottom: 4rem;
+    }
+
+    .comparison-header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 1.75rem;
+    }
+
+    .comparison-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      color: var(--ink);
+      font-style: italic;
+    }
+
+    .vs-badge {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--charcoal);
+      color: #fff;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .cards-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      align-items: start;
+    }
+
+    /* ─── Card ─── */
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      box-shadow: var(--shadow);
+      transition: box-shadow 0.25s ease, transform 0.25s ease;
+      position: relative;
+    }
+
+    .card:hover {
+      box-shadow: var(--shadow-hover);
+      transform: translateY(-2px);
+    }
+
+    .card.luxury::before {
+      content: 'ORIGINAL';
+      position: absolute;
+      top: 1.25rem;
+      right: 1.25rem;
+      font-size: 0.58rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      color: var(--warm-gray);
+      background: var(--parchment);
+      padding: 0.25em 0.7em;
+      border-radius: 100px;
+    }
+
+    .card.dupe::before {
+      content: 'DUPE';
+      position: absolute;
+      top: 1.25rem;
+      right: 1.25rem;
+      font-size: 0.58rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      color: var(--accent);
+      background: var(--accent-lt);
+      padding: 0.25em 0.7em;
+      border-radius: 100px;
+    }
+
+    /* ─── Category tag ─── */
+    .category-tag {
+      display: inline-block;
+      font-size: 0.62rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--charcoal);
+      background: var(--stone);
+      padding: 0.3em 0.9em;
+      border-radius: 100px;
+      margin-bottom: 1.1rem;
+    }
+
+    /* ─── Card body ─── */
+    .card-brand {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.3rem;
+    }
+
+    .card-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--ink);
+      line-height: 1.3;
+      margin-bottom: 0.5rem;
+    }
+
+    .card-price {
+      font-size: 1.5rem;
+      font-weight: 300;
+      color: var(--charcoal);
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+    }
+
+    /* ─── Scores ─── */
+    .scores {
+      border-top: 1px solid var(--border);
+      padding-top: 1.25rem;
+      margin-bottom: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .score-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+    }
+
+    .score-label {
+      font-size: 0.72rem;
+      font-weight: 500;
+      color: var(--warm-gray);
+      letter-spacing: 0.04em;
+      min-width: 100px;
+    }
+
+    .score-track {
+      flex: 1;
+      height: 4px;
+      background: var(--stone);
+      border-radius: 100px;
+      overflow: hidden;
+    }
+
+    .score-fill {
+      height: 100%;
+      background: var(--accent);
+      border-radius: 100px;
+      transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .score-pips {
+      display: flex;
+      gap: 4px;
+      flex-shrink: 0;
+    }
+
+    .pip {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--stone);
+      transition: background 0.2s;
+    }
+
+    .pip.filled {
+      background: var(--accent);
+    }
+
+    /* ─── Miya's Take ─── */
+    .miyas-take {
+      background: var(--parchment);
+      border-radius: var(--radius-md);
+      padding: 1rem 1.1rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .miyas-take-label {
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.4rem;
+    }
+
+    .miyas-take p {
+      font-size: 0.82rem;
+      line-height: 1.65;
+      color: var(--charcoal);
+      font-style: italic;
+    }
+
+    /* ─── Verdict badge ─── */
+    .verdict {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1rem;
+      border-radius: var(--radius-md);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .verdict.approved {
+      background: var(--approved-lt);
+      color: var(--approved);
+    }
+
+    .verdict.dud {
+      background: var(--dud-lt);
+      color: var(--dud);
+    }
+
+    .verdict-icon {
+      font-size: 1rem;
+      line-height: 1;
+    }
+
+    /* ─── Footer ─── */
+    footer {
+      text-align: center;
+      padding: 2.5rem 2rem;
+      border-top: 1px solid var(--border);
+      background: var(--card-bg);
+    }
+
+    footer p {
+      font-size: 0.78rem;
+      color: var(--warm-gray);
+      letter-spacing: 0.04em;
+    }
+
+    footer strong {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    /* ─── Responsive ─── */
+    @media (max-width: 700px) {
+      .cards-row {
+        grid-template-columns: 1fr;
+      }
+      .hero { padding: 3rem 1.5rem 2.5rem; }
+      main { padding: 0 1.25rem 4rem; }
+      header { padding: 0 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="header-inner">
+      <div class="site-logo">Dupe <span>or</span> Dud</div>
+      <div class="header-tag">By Miya · Beauty Reviews</div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-eyebrow">The Honest Edit</div>
+    <h1>Does the dupe <em>actually</em> deliver?</h1>
+    <p>Side-by-side scores on the products beauty lovers are talking about — so you know exactly where to spend and where to save.</p>
+  </section>
+
+  <!-- Main content -->
+  <main>
+
+    <!-- ─── Comparison 1: Lip ─── -->
+    <div class="divider">
+      <div class="divider-line"></div>
+      <div class="divider-label">Review No. 01</div>
+      <div class="divider-line"></div>
+    </div>
+
+    <div class="comparison">
+      <div class="comparison-header">
+        <div class="comparison-title">Charlotte Tilbury vs. e.l.f.</div>
+        <div class="vs-badge">VS</div>
+        <div class="comparison-title" style="text-align:right;">Lip Liner Showdown</div>
+      </div>
+
+      <div class="cards-row">
+
+        <!-- Luxury -->
+        <div class="card luxury">
+          <div class="category-tag">Lip</div>
+          <div class="card-brand">Charlotte Tilbury</div>
+          <div class="card-name">Lip Cheat Lip Liner</div>
+          <div class="card-price">$28</div>
+
+          <div class="scores">
+            <div class="score-row">
+              <div class="score-label">Glow / Finish</div>
+              <div class="score-track"><div class="score-fill" style="width:90%"></div></div>
+              <div class="score-pips">
+                <div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled" style="opacity:.4"></div>
+              </div>
+            </div>
+            <div class="score-row">
+              <div class="score-label">Blendability</div>
+              <div class="score-track"><div class="score-fill" style="width:100%"></div></div>
+              <div class="score-pips">
+                <div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div>
+              </div>
+            </div>
+            <div class="score-row">
+              <div class="score-label">Shade Range</div>
+              <div class="score-track"><div class="score-fill" style="width:90%"></div></div>
+              <div class="score-pips">
+                <div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled" style="opacity:.4"></div>
+              </div>
+            </div>
+            <div class="score-row">
+              <div class="score-label">Longevity</div>
+              <div class="score-track"><div class="score-fill" style="width:80%"></div></div>
+              <div class="score-pips">
+                <div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="miyas-take">
+            <div class="miyas-take-label">Miya's Take</div>
+            <p>"The gold standard for a reason. Feathers into the lip perfectly and the pigment is consistently rich. Worth every penny — but is it worth six times the price?"</p>
+          </div>
+
+          <div class="verdict approved">
+            <span class="verdict-icon">✦</span> Dupe Approved Reference
+          </div>
+        </div>
+
+        <!-- Dupe -->
+        <div class="card dupe">
+          <div class="category-tag">Lip</div>
+          <div class="card-brand">e.l.f. Cosmetics</div>
+          <div class="card-name">No Budge Lip Liner</div>
+          <div class="card-price">$8</div>
+
+          <div class="scores">
+            <div class="score-row">
+              <div class="score-label">Glow / Finish</div>
+              <div class="score-track"><div class="score-fill" style="width:70%"></div></div>
+              <div class="score-pips">
+                <div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled" style="opacity:.4"></div><div class="pip"></div>
+              </div>
+            </div>
+            <div class="score-row">
+              <div class="score-label">Blendability</div>
+              <div class="score-track"><div class="score-fill" style="width:80%"></div></div>
+              <div class="score-pips">
+                <div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip"></div>
+              </div>
+            </div>
+            <div class="score-row">
+              <div class="score-label">Shade Range</div>
+              <div class="score-track"><div class="score-fill" style="width:70%"></div></div>
+              <div class="score-pips">
+                <div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled" style="opacity:.4"></div><div class="pip"></div>
+              </div>
+            </div>
+            <div class="score-row">
+              <div class="score-label">Longevity</div>
+              <div class="score-track"><div class="score-fill" style="width:90%"></div></div>
+              <div class="score-pips">
+                <div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled" style="opacity:.4"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="miyas-take">
+            <div class="miyas-take-label">Miya's Take</div>
+            <p>"Shockingly close. The formula isn't quite as creamy but it actually outlasts the CT on my oily skin. At $8, this is an easy yes — grab three shades."</p>
+          </div>
+
+          <div class="verdict approved">
+            <span class="verdict-icon">✓</span> Dupe Approved
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ─── Comparison 2: Blush ─── -->
+    <div class="divider">
+      <div class="divider-line"></div>
+      <div class="divider-label">Review No. 02</div>
+      <div class="divider-line"></div>
+    </div>
+
+    <div class="comparison">
+      <div class="comparison-header">
+        <div class="comparison-title">NARS vs. Flower Beauty</div>
+        <div class="vs-badge">VS</div>
+        <div class="comparison-title" style="text-align:right;">Blush Battle</div>
+      </div>
+
+      <div class="cards-row">
+
+        <!-- Luxury -->
+        <div class="card luxury">
+          <div class="category-tag">Blush</div>
+          <div class="card-brand">NARS</div>
+          <div class="card-name">Orgasm Blush</div>
+          <div class="card-price">$38</div>
+
+          <div class="scores">
+            <div class="score-row">
+              <div class="score-label">Glow / Finish</div>
+              <div class="score-track"><div class="score-fill" style="width:100%"></div></div>
+              <div class="score-pips">
+                <div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div>
+              </div>
+            </div>
+            <div class="score-row">
+              <div class="score-label">Blendability</div>
+              <div class="score-track"><div class="score-fill" style="width:100%"></div></div>
+              <div class="score-pips">
+                <div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div>
+              </div>
+            </div>
+            <div class="score-row">
+              <div class="score-label">Shade Range</div>
+              <div class="score-track"><div class="score-fill" style="width:60%"></div></div>
+              <div class="score-pips">
+                <div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip"></div><div class="pip"></div>
+              </div>
+            </div>
+            <div class="score-row">
+              <div class="score-label">Longevity</div>
+              <div class="score-track"><div class="score-fill" style="width:80%"></div></div>
+              <div class="score-pips">
+                <div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="miyas-take">
+            <div class="miyas-take-label">Miya's Take</div>
+            <p>"The iconic peachy-nude glow that works on almost every skin tone. The shimmer is finely milled — never chunky. An industry legend for good reason."</p>
+          </div>
+
+          <div class="verdict approved">
+            <span class="verdict-icon">✦</span> Dupe Approved Reference
+          </div>
+        </div>
+
+        <!-- Dupe -->
+        <div class="card dupe">
+          <div class="category-tag">Blush</div>
+          <div class="card-brand">Flower Beauty</div>
+          <div class="card-name">Flower Pots Powder Blush</div>
+          <div class="card-price">$10</div>
+
+          <div class="scores">
+            <div class="score-row">
+              <div class="score-label">Glow / Finish</div>
+              <div class="score-track"><div class="score-fill" style="width:60%"></div></div>
+              <div class="score-pips">
+                <div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip"></div><div class="pip"></div>
+              </div>
+            </div>
+            <div class="score-row">
+              <div class="score-label">Blendability</div>
+              <div class="score-track"><div class="score-fill" style="width:80%"></div></div>
+              <div class="score-pips">
+                <div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip"></div>
+              </div>
+            </div>
+            <div class="score-row">
+              <div class="score-label">Shade Range</div>
+              <div class="score-track"><div class="score-fill" style="width:80%"></div></div>
+              <div class="score-pips">
+                <div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip"></div>
+              </div>
+            </div>
+            <div class="score-row">
+              <div class="score-label">Longevity</div>
+              <div class="score-track"><div class="score-fill" style="width:60%"></div></div>
+              <div class="score-pips">
+                <div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip"></div><div class="pip"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="miyas-take">
+            <div class="miyas-take-label">Miya's Take</div>
+            <p>"Similar peachy tone but the shimmer reads more glitter up close and it fades significantly by midday. Not the dupe we were hoping for — save your $10 for something else."</p>
+          </div>
+
+          <div class="verdict dud">
+            <span class="verdict-icon">✕</span> Dud
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ─── Comparison 3: Foundation ─── -->
+    <div class="divider">
+      <div class="divider-line"></div>
+      <div class="divider-label">Review No. 03</div>
+      <div class="divider-line"></div>
+    </div>
+
+    <div class="comparison">
+      <div class="comparison-header">
+        <div class="comparison-title">Armani Beauty vs. L'Oréal</div>
+        <div class="vs-badge">VS</div>
+        <div class="comparison-title" style="text-align:right;">Foundation Face-Off</div>
+      </div>
+
+      <div class="cards-row">
+
+        <!-- Luxury -->
+        <div class="card luxury">
+          <div class="category-tag">Foundation</div>
+          <div class="card-brand">Armani Beauty</div>
+          <div class="card-name">Luminous Silk Foundation</div>
+          <div class="card-price">$70</div>
+
+          <div class="scores">
+            <div class="score-row">
+              <div class="score-label">Glow / Finish</div>
+              <div class="score-track"><div class="score-fill" style="width:100%"></div></div>
+              <div class="score-pips">
+                <div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div>
+              </div>
+            </div>
+            <div class="score-row">
+              <div class="score-label">Blendability</div>
+              <div class="score-track"><div class="score-fill" style="width:100%"></div></div>
+              <div class="score-pips">
+                <div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div>
+              </div>
+            </div>
+            <div class="score-row">
+              <div class="score-label">Shade Range</div>
+              <div class="score-track"><div class="score-fill" style="width:100%"></div></div>
+              <div class="score-pips">
+                <div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div>
+              </div>
+            </div>
+            <div class="score-row">
+              <div class="score-label">Longevity</div>
+              <div class="score-track"><div class="score-fill" style="width:90%"></div></div>
+              <div class="score-pips">
+                <div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled" style="opacity:.4"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="miyas-take">
+            <div class="miyas-take-label">Miya's Take</div>
+            <p>"The benchmark for a satin-skin foundation. Blurs imperfections without masking skin texture, and the 40-shade range is genuinely inclusive. It photographs beautifully."</p>
+          </div>
+
+          <div class="verdict approved">
+            <span class="verdict-icon">✦</span> Dupe Approved Reference
+          </div>
+        </div>
+
+        <!-- Dupe -->
+        <div class="card dupe">
+          <div class="category-tag">Foundation</div>
+          <div class="card-brand">L'Oréal Paris</div>
+          <div class="card-name">True Match Lumi Foundation</div>
+          <div class="card-price">$13</div>
+
+          <div class="scores">
+            <div class="score-row">
+              <div class="score-label">Glow / Finish</div>
+              <div class="score-track"><div class="score-fill" style="width:90%"></div></div>
+              <div class="score-pips">
+                <div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled" style="opacity:.4"></div>
+              </div>
+            </div>
+            <div class="score-row">
+              <div class="score-label">Blendability</div>
+              <div class="score-track"><div class="score-fill" style="width:90%"></div></div>
+              <div class="score-pips">
+                <div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled" style="opacity:.4"></div>
+              </div>
+            </div>
+            <div class="score-row">
+              <div class="score-label">Shade Range</div>
+              <div class="score-track"><div class="score-fill" style="width:90%"></div></div>
+              <div class="score-pips">
+                <div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled" style="opacity:.4"></div>
+              </div>
+            </div>
+            <div class="score-row">
+              <div class="score-label">Longevity</div>
+              <div class="score-track"><div class="score-fill" style="width:80%"></div></div>
+              <div class="score-pips">
+                <div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="miyas-take">
+            <div class="miyas-take-label">Miya's Take</div>
+            <p>"This is embarrassingly good for $13. The luminous finish is nearly identical in photos, the shade range holds up, and it blends like a dream. An absolute steal."</p>
+          </div>
+
+          <div class="verdict approved">
+            <span class="verdict-icon">✓</span> Dupe Approved
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>All scores are Miya's independent assessments. No sponsorships. <strong>Dupe or Dud</strong> — because your wallet deserves an honest answer.</p>
+  </footer>
+
+</body>
+</html>
