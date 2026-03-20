@@ -12,26 +12,26 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --cream:      #f9f6f1;
-      --parchment:  #f0ebe2;
-      --stone:      #e5dfd5;
-      --warm-gray:  #9c9488;
-      --charcoal:   #2c2825;
-      --ink:        #1a1714;
-      --accent:     #c17b5c;
-      --accent-lt:  #f0ddd3;
-      --approved:   #3d6b4f;
-      --approved-lt:#e4f0e8;
-      --dud:        #8b3a3a;
-      --dud-lt:     #f5e4e4;
+      --cream:      #f5f5f5;
+      --parchment:  #eeeeee;
+      --stone:      #e0e0e0;
+      --warm-gray:  #767676;
+      --charcoal:   #222222;
+      --ink:        #000000;
+      --accent:     #e2001a;
+      --accent-lt:  #fce8ea;
+      --approved:   #1a7a3c;
+      --approved-lt:#e6f4ec;
+      --dud:        #9b0000;
+      --dud-lt:     #fce8e8;
       --card-bg:    #ffffff;
-      --border:     #e0d9cf;
+      --border:     #e0e0e0;
 
-      --radius-sm:  6px;
-      --radius-md:  12px;
-      --radius-lg:  20px;
-      --shadow:     0 2px 16px rgba(44,40,37,.07), 0 1px 4px rgba(44,40,37,.05);
-      --shadow-hover: 0 8px 40px rgba(44,40,37,.12), 0 2px 8px rgba(44,40,37,.07);
+      --radius-sm:  4px;
+      --radius-md:  8px;
+      --radius-lg:  12px;
+      --shadow:     0 2px 12px rgba(0,0,0,.06), 0 1px 3px rgba(0,0,0,.04);
+      --shadow-hover: 0 8px 32px rgba(0,0,0,.12), 0 2px 8px rgba(0,0,0,.06);
     }
 
     html { scroll-behavior: smooth; }
@@ -91,14 +91,15 @@
 
     .hero-eyebrow {
       display: inline-block;
-      font-size: 0.68rem;
-      font-weight: 600;
-      letter-spacing: 0.2em;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
       color: var(--accent);
-      background: var(--accent-lt);
-      padding: 0.35em 1em;
-      border-radius: 100px;
+      background: transparent;
+      border: 1px solid var(--accent);
+      padding: 0.3em 1em;
+      border-radius: 0;
       margin-bottom: 1.5rem;
     }
 
@@ -230,13 +231,14 @@
       position: absolute;
       top: 1.25rem;
       right: 1.25rem;
-      font-size: 0.58rem;
+      font-size: 0.55rem;
       font-weight: 700;
       letter-spacing: 0.18em;
       color: var(--warm-gray);
       background: var(--parchment);
+      border: 1px solid var(--border);
       padding: 0.25em 0.7em;
-      border-radius: 100px;
+      border-radius: 0;
     }
 
     .card-flip.dupe .card-front::before {
@@ -244,26 +246,28 @@
       position: absolute;
       top: 1.25rem;
       right: 1.25rem;
-      font-size: 0.58rem;
+      font-size: 0.55rem;
       font-weight: 700;
       letter-spacing: 0.18em;
       color: var(--accent);
       background: var(--accent-lt);
+      border: 1px solid var(--accent);
       padding: 0.25em 0.7em;
-      border-radius: 100px;
+      border-radius: 0;
     }
 
     /* ─── Category tag ─── */
     .category-tag {
       display: inline-block;
-      font-size: 0.62rem;
+      font-size: 0.6rem;
       font-weight: 600;
-      letter-spacing: 0.16em;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--charcoal);
-      background: var(--stone);
+      background: transparent;
+      border: 1px solid var(--border);
       padding: 0.3em 0.9em;
-      border-radius: 100px;
+      border-radius: 0;
       margin-bottom: 1.1rem;
     }
 
@@ -437,15 +441,15 @@
       justify-content: center;
       gap: 0.5rem;
       padding: 0.75rem 1rem;
-      border-radius: var(--radius-md);
-      font-size: 0.72rem;
+      border-radius: 0;
+      font-size: 0.7rem;
       font-weight: 700;
-      letter-spacing: 0.16em;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
     }
 
-    .verdict.approved { background: var(--approved-lt); color: var(--approved); }
-    .verdict.dud      { background: var(--dud-lt);      color: var(--dud); }
+    .verdict.approved { background: var(--approved-lt); color: var(--approved); border: 1px solid var(--approved); }
+    .verdict.dud      { background: var(--dud-lt);      color: var(--dud);      border: 1px solid var(--dud); }
 
     .verdict-icon { font-size: 1rem; line-height: 1; }
 
