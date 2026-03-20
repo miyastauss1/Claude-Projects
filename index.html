@@ -18,7 +18,7 @@
       --warm-gray:  #9c9488;
       --charcoal:   #2c2825;
       --ink:        #1a1714;
-      --accent:     #c17b5c;       /* terracotta — the one accent */
+      --accent:     #c17b5c;
       --accent-lt:  #f0ddd3;
       --approved:   #3d6b4f;
       --approved-lt:#e4f0e8;
@@ -71,9 +71,7 @@
       letter-spacing: 0.02em;
     }
 
-    .site-logo span {
-      color: var(--accent);
-    }
+    .site-logo span { color: var(--accent); }
 
     .header-tag {
       font-size: 0.7rem;
@@ -113,10 +111,7 @@
       letter-spacing: -0.01em;
     }
 
-    .hero h1 em {
-      color: var(--accent);
-      font-style: italic;
-    }
+    .hero h1 em { color: var(--accent); font-style: italic; }
 
     .hero p {
       font-size: 1.05rem;
@@ -154,9 +149,7 @@
     }
 
     /* ─── Comparison pair ─── */
-    .comparison {
-      margin-bottom: 4rem;
-    }
+    .comparison { margin-bottom: 4rem; }
 
     .comparison-header {
       display: flex;
@@ -195,23 +188,44 @@
       align-items: start;
     }
 
-    /* ─── Card ─── */
+    /* ─── Flip container ─── */
+    .card-flip {
+      perspective: 1200px;
+      cursor: pointer;
+    }
+
+    .card-inner {
+      display: grid;
+      grid-template: 1fr / 1fr;
+      transform-style: preserve-3d;
+      transition: transform 0.65s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .card-flip.flipped .card-inner {
+      transform: rotateY(180deg);
+    }
+
+    /* ─── Card (shared face styles) ─── */
     .card {
       background: var(--card-bg);
       border: 1px solid var(--border);
       border-radius: var(--radius-lg);
       padding: 2rem;
       box-shadow: var(--shadow);
-      transition: box-shadow 0.25s ease, transform 0.25s ease;
       position: relative;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
     }
 
-    .card:hover {
+    .card-front { grid-area: 1 / 1; }
+    .card-back  { grid-area: 1 / 1; transform: rotateY(180deg); }
+
+    .card-flip:hover .card {
       box-shadow: var(--shadow-hover);
-      transform: translateY(-2px);
     }
 
-    .card.luxury::before {
+    /* ORIGINAL / DUPE labels — on the front face via parent class */
+    .card-flip.luxury .card-front::before {
       content: 'ORIGINAL';
       position: absolute;
       top: 1.25rem;
@@ -225,7 +239,7 @@
       border-radius: 100px;
     }
 
-    .card.dupe::before {
+    .card-flip.dupe .card-front::before {
       content: 'DUPE';
       position: absolute;
       top: 1.25rem;
@@ -335,8 +349,62 @@
       transition: background 0.2s;
     }
 
-    .pip.filled {
-      background: var(--accent);
+    .pip.filled { background: var(--accent); }
+
+    /* ─── Flip hint ─── */
+    .flip-hint {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.45rem;
+      font-size: 0.63rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--warm-gray);
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+      user-select: none;
+    }
+
+    .flip-hint .flip-icon {
+      font-size: 0.85rem;
+      opacity: 0.55;
+      display: inline-block;
+      transition: transform 0.3s ease;
+    }
+
+    .card-flip:hover .flip-hint .flip-icon {
+      transform: rotate(45deg);
+    }
+
+    /* ─── Back face ─── */
+    .card-back {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .back-product {
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+    }
+
+    .back-brand {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .back-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--ink);
+      line-height: 1.3;
     }
 
     /* ─── Miya's Take ─── */
@@ -344,7 +412,6 @@
       background: var(--parchment);
       border-radius: var(--radius-md);
       padding: 1rem 1.1rem;
-      margin-bottom: 1.25rem;
     }
 
     .miyas-take-label {
@@ -377,20 +444,10 @@
       text-transform: uppercase;
     }
 
-    .verdict.approved {
-      background: var(--approved-lt);
-      color: var(--approved);
-    }
+    .verdict.approved { background: var(--approved-lt); color: var(--approved); }
+    .verdict.dud      { background: var(--dud-lt);      color: var(--dud); }
 
-    .verdict.dud {
-      background: var(--dud-lt);
-      color: var(--dud);
-    }
-
-    .verdict-icon {
-      font-size: 1rem;
-      line-height: 1;
-    }
+    .verdict-icon { font-size: 1rem; line-height: 1; }
 
     /* ─── Footer ─── */
     footer {
@@ -400,22 +457,12 @@
       background: var(--card-bg);
     }
 
-    footer p {
-      font-size: 0.78rem;
-      color: var(--warm-gray);
-      letter-spacing: 0.04em;
-    }
-
-    footer strong {
-      color: var(--accent);
-      font-weight: 600;
-    }
+    footer p { font-size: 0.78rem; color: var(--warm-gray); letter-spacing: 0.04em; }
+    footer strong { color: var(--accent); font-weight: 600; }
 
     /* ─── Responsive ─── */
     @media (max-width: 700px) {
-      .cards-row {
-        grid-template-columns: 1fr;
-      }
+      .cards-row { grid-template-columns: 1fr; }
       .hero { padding: 3rem 1.5rem 2.5rem; }
       main { padding: 0 1.25rem 4rem; }
       header { padding: 0 1.25rem; }
@@ -458,99 +505,123 @@
 
       <div class="cards-row">
 
-        <!-- Luxury -->
-        <div class="card luxury">
-          <div class="category-tag">Lip</div>
-          <div class="card-brand">Charlotte Tilbury</div>
-          <div class="card-name">Lip Cheat Lip Liner</div>
-          <div class="card-price">$28</div>
+        <!-- Luxury flip card -->
+        <div class="card-flip luxury">
+          <div class="card-inner">
 
-          <div class="scores">
-            <div class="score-row">
-              <div class="score-label">Glow / Finish</div>
-              <div class="score-track"><div class="score-fill" data-score="90"></div></div>
-              <div class="score-pips">
-                <div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled" style="opacity:.4"></div>
+            <div class="card card-front">
+              <div class="category-tag">Lip</div>
+              <div class="card-brand">Charlotte Tilbury</div>
+              <div class="card-name">Lip Cheat Lip Liner</div>
+              <div class="card-price">$28</div>
+              <div class="scores">
+                <div class="score-row">
+                  <div class="score-label">Glow / Finish</div>
+                  <div class="score-track"><div class="score-fill" data-score="90"></div></div>
+                  <div class="score-pips">
+                    <div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled" style="opacity:.4"></div>
+                  </div>
+                </div>
+                <div class="score-row">
+                  <div class="score-label">Blendability</div>
+                  <div class="score-track"><div class="score-fill" data-score="100"></div></div>
+                  <div class="score-pips">
+                    <div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div>
+                  </div>
+                </div>
+                <div class="score-row">
+                  <div class="score-label">Shade Range</div>
+                  <div class="score-track"><div class="score-fill" data-score="90"></div></div>
+                  <div class="score-pips">
+                    <div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled" style="opacity:.4"></div>
+                  </div>
+                </div>
+                <div class="score-row">
+                  <div class="score-label">Longevity</div>
+                  <div class="score-track"><div class="score-fill" data-score="80"></div></div>
+                  <div class="score-pips">
+                    <div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip"></div>
+                  </div>
+                </div>
               </div>
+              <div class="flip-hint">Tap for verdict <span class="flip-icon">↺</span></div>
             </div>
-            <div class="score-row">
-              <div class="score-label">Blendability</div>
-              <div class="score-track"><div class="score-fill" data-score="100"></div></div>
-              <div class="score-pips">
-                <div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div>
-              </div>
-            </div>
-            <div class="score-row">
-              <div class="score-label">Shade Range</div>
-              <div class="score-track"><div class="score-fill" data-score="90"></div></div>
-              <div class="score-pips">
-                <div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled" style="opacity:.4"></div>
-              </div>
-            </div>
-            <div class="score-row">
-              <div class="score-label">Longevity</div>
-              <div class="score-track"><div class="score-fill" data-score="80"></div></div>
-              <div class="score-pips">
-                <div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip"></div>
-              </div>
-            </div>
-          </div>
 
-          <div class="miyas-take">
-            <div class="miyas-take-label">Miya's Take</div>
-            <p>"The gold standard for a reason. Feathers into the lip perfectly and the pigment is consistently rich. Worth every penny — but is it worth six times the price?"</p>
-          </div>
+            <div class="card card-back">
+              <div class="back-product">
+                <div class="back-brand">Charlotte Tilbury</div>
+                <div class="back-name">Lip Cheat Lip Liner</div>
+              </div>
+              <div class="miyas-take">
+                <div class="miyas-take-label">Miya's Take</div>
+                <p>"The gold standard for a reason. Feathers into the lip perfectly and the pigment is consistently rich. Worth every penny — but is it worth six times the price?"</p>
+              </div>
+              <div class="verdict approved">
+                <span class="verdict-icon">✦</span> Dupe Approved Reference
+              </div>
+              <div class="flip-hint">Tap to go back <span class="flip-icon">↺</span></div>
+            </div>
 
-          <div class="verdict approved">
-            <span class="verdict-icon">✦</span> Dupe Approved Reference
           </div>
         </div>
 
-        <!-- Dupe -->
-        <div class="card dupe">
-          <div class="category-tag">Lip</div>
-          <div class="card-brand">e.l.f. Cosmetics</div>
-          <div class="card-name">No Budge Lip Liner</div>
-          <div class="card-price">$8</div>
+        <!-- Dupe flip card -->
+        <div class="card-flip dupe">
+          <div class="card-inner">
 
-          <div class="scores">
-            <div class="score-row">
-              <div class="score-label">Glow / Finish</div>
-              <div class="score-track"><div class="score-fill" data-score="70"></div></div>
-              <div class="score-pips">
-                <div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled" style="opacity:.4"></div><div class="pip"></div>
+            <div class="card card-front">
+              <div class="category-tag">Lip</div>
+              <div class="card-brand">e.l.f. Cosmetics</div>
+              <div class="card-name">No Budge Lip Liner</div>
+              <div class="card-price">$8</div>
+              <div class="scores">
+                <div class="score-row">
+                  <div class="score-label">Glow / Finish</div>
+                  <div class="score-track"><div class="score-fill" data-score="70"></div></div>
+                  <div class="score-pips">
+                    <div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled" style="opacity:.4"></div><div class="pip"></div>
+                  </div>
+                </div>
+                <div class="score-row">
+                  <div class="score-label">Blendability</div>
+                  <div class="score-track"><div class="score-fill" data-score="80"></div></div>
+                  <div class="score-pips">
+                    <div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip"></div>
+                  </div>
+                </div>
+                <div class="score-row">
+                  <div class="score-label">Shade Range</div>
+                  <div class="score-track"><div class="score-fill" data-score="70"></div></div>
+                  <div class="score-pips">
+                    <div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled" style="opacity:.4"></div><div class="pip"></div>
+                  </div>
+                </div>
+                <div class="score-row">
+                  <div class="score-label">Longevity</div>
+                  <div class="score-track"><div class="score-fill" data-score="90"></div></div>
+                  <div class="score-pips">
+                    <div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled" style="opacity:.4"></div>
+                  </div>
+                </div>
               </div>
+              <div class="flip-hint">Tap for verdict <span class="flip-icon">↺</span></div>
             </div>
-            <div class="score-row">
-              <div class="score-label">Blendability</div>
-              <div class="score-track"><div class="score-fill" data-score="80"></div></div>
-              <div class="score-pips">
-                <div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip"></div>
-              </div>
-            </div>
-            <div class="score-row">
-              <div class="score-label">Shade Range</div>
-              <div class="score-track"><div class="score-fill" data-score="70"></div></div>
-              <div class="score-pips">
-                <div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled" style="opacity:.4"></div><div class="pip"></div>
-              </div>
-            </div>
-            <div class="score-row">
-              <div class="score-label">Longevity</div>
-              <div class="score-track"><div class="score-fill" data-score="90"></div></div>
-              <div class="score-pips">
-                <div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled" style="opacity:.4"></div>
-              </div>
-            </div>
-          </div>
 
-          <div class="miyas-take">
-            <div class="miyas-take-label">Miya's Take</div>
-            <p>"Shockingly close. The formula isn't quite as creamy but it actually outlasts the CT on my oily skin. At $8, this is an easy yes — grab three shades."</p>
-          </div>
+            <div class="card card-back">
+              <div class="back-product">
+                <div class="back-brand">e.l.f. Cosmetics</div>
+                <div class="back-name">No Budge Lip Liner</div>
+              </div>
+              <div class="miyas-take">
+                <div class="miyas-take-label">Miya's Take</div>
+                <p>"Shockingly close. The formula isn't quite as creamy but it actually outlasts the CT on my oily skin. At $8, this is an easy yes — grab three shades."</p>
+              </div>
+              <div class="verdict approved">
+                <span class="verdict-icon">✓</span> Dupe Approved
+              </div>
+              <div class="flip-hint">Tap to go back <span class="flip-icon">↺</span></div>
+            </div>
 
-          <div class="verdict approved">
-            <span class="verdict-icon">✓</span> Dupe Approved
           </div>
         </div>
 
@@ -573,99 +644,123 @@
 
       <div class="cards-row">
 
-        <!-- Luxury -->
-        <div class="card luxury">
-          <div class="category-tag">Blush</div>
-          <div class="card-brand">NARS</div>
-          <div class="card-name">Orgasm Blush</div>
-          <div class="card-price">$38</div>
+        <!-- Luxury flip card -->
+        <div class="card-flip luxury">
+          <div class="card-inner">
 
-          <div class="scores">
-            <div class="score-row">
-              <div class="score-label">Glow / Finish</div>
-              <div class="score-track"><div class="score-fill" data-score="100"></div></div>
-              <div class="score-pips">
-                <div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div>
+            <div class="card card-front">
+              <div class="category-tag">Blush</div>
+              <div class="card-brand">NARS</div>
+              <div class="card-name">Orgasm Blush</div>
+              <div class="card-price">$38</div>
+              <div class="scores">
+                <div class="score-row">
+                  <div class="score-label">Glow / Finish</div>
+                  <div class="score-track"><div class="score-fill" data-score="100"></div></div>
+                  <div class="score-pips">
+                    <div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div>
+                  </div>
+                </div>
+                <div class="score-row">
+                  <div class="score-label">Blendability</div>
+                  <div class="score-track"><div class="score-fill" data-score="100"></div></div>
+                  <div class="score-pips">
+                    <div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div>
+                  </div>
+                </div>
+                <div class="score-row">
+                  <div class="score-label">Shade Range</div>
+                  <div class="score-track"><div class="score-fill" data-score="60"></div></div>
+                  <div class="score-pips">
+                    <div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip"></div><div class="pip"></div>
+                  </div>
+                </div>
+                <div class="score-row">
+                  <div class="score-label">Longevity</div>
+                  <div class="score-track"><div class="score-fill" data-score="80"></div></div>
+                  <div class="score-pips">
+                    <div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip"></div>
+                  </div>
+                </div>
               </div>
+              <div class="flip-hint">Tap for verdict <span class="flip-icon">↺</span></div>
             </div>
-            <div class="score-row">
-              <div class="score-label">Blendability</div>
-              <div class="score-track"><div class="score-fill" data-score="100"></div></div>
-              <div class="score-pips">
-                <div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div>
-              </div>
-            </div>
-            <div class="score-row">
-              <div class="score-label">Shade Range</div>
-              <div class="score-track"><div class="score-fill" data-score="60"></div></div>
-              <div class="score-pips">
-                <div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip"></div><div class="pip"></div>
-              </div>
-            </div>
-            <div class="score-row">
-              <div class="score-label">Longevity</div>
-              <div class="score-track"><div class="score-fill" data-score="80"></div></div>
-              <div class="score-pips">
-                <div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip"></div>
-              </div>
-            </div>
-          </div>
 
-          <div class="miyas-take">
-            <div class="miyas-take-label">Miya's Take</div>
-            <p>"The iconic peachy-nude glow that works on almost every skin tone. The shimmer is finely milled — never chunky. An industry legend for good reason."</p>
-          </div>
+            <div class="card card-back">
+              <div class="back-product">
+                <div class="back-brand">NARS</div>
+                <div class="back-name">Orgasm Blush</div>
+              </div>
+              <div class="miyas-take">
+                <div class="miyas-take-label">Miya's Take</div>
+                <p>"The iconic peachy-nude glow that works on almost every skin tone. The shimmer is finely milled — never chunky. An industry legend for good reason."</p>
+              </div>
+              <div class="verdict approved">
+                <span class="verdict-icon">✦</span> Dupe Approved Reference
+              </div>
+              <div class="flip-hint">Tap to go back <span class="flip-icon">↺</span></div>
+            </div>
 
-          <div class="verdict approved">
-            <span class="verdict-icon">✦</span> Dupe Approved Reference
           </div>
         </div>
 
-        <!-- Dupe -->
-        <div class="card dupe">
-          <div class="category-tag">Blush</div>
-          <div class="card-brand">Flower Beauty</div>
-          <div class="card-name">Flower Pots Powder Blush</div>
-          <div class="card-price">$10</div>
+        <!-- Dupe flip card -->
+        <div class="card-flip dupe">
+          <div class="card-inner">
 
-          <div class="scores">
-            <div class="score-row">
-              <div class="score-label">Glow / Finish</div>
-              <div class="score-track"><div class="score-fill" data-score="60"></div></div>
-              <div class="score-pips">
-                <div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip"></div><div class="pip"></div>
+            <div class="card card-front">
+              <div class="category-tag">Blush</div>
+              <div class="card-brand">Flower Beauty</div>
+              <div class="card-name">Flower Pots Powder Blush</div>
+              <div class="card-price">$10</div>
+              <div class="scores">
+                <div class="score-row">
+                  <div class="score-label">Glow / Finish</div>
+                  <div class="score-track"><div class="score-fill" data-score="60"></div></div>
+                  <div class="score-pips">
+                    <div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip"></div><div class="pip"></div>
+                  </div>
+                </div>
+                <div class="score-row">
+                  <div class="score-label">Blendability</div>
+                  <div class="score-track"><div class="score-fill" data-score="80"></div></div>
+                  <div class="score-pips">
+                    <div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip"></div>
+                  </div>
+                </div>
+                <div class="score-row">
+                  <div class="score-label">Shade Range</div>
+                  <div class="score-track"><div class="score-fill" data-score="80"></div></div>
+                  <div class="score-pips">
+                    <div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip"></div>
+                  </div>
+                </div>
+                <div class="score-row">
+                  <div class="score-label">Longevity</div>
+                  <div class="score-track"><div class="score-fill" data-score="60"></div></div>
+                  <div class="score-pips">
+                    <div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip"></div><div class="pip"></div>
+                  </div>
+                </div>
               </div>
+              <div class="flip-hint">Tap for verdict <span class="flip-icon">↺</span></div>
             </div>
-            <div class="score-row">
-              <div class="score-label">Blendability</div>
-              <div class="score-track"><div class="score-fill" data-score="80"></div></div>
-              <div class="score-pips">
-                <div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip"></div>
-              </div>
-            </div>
-            <div class="score-row">
-              <div class="score-label">Shade Range</div>
-              <div class="score-track"><div class="score-fill" data-score="80"></div></div>
-              <div class="score-pips">
-                <div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip"></div>
-              </div>
-            </div>
-            <div class="score-row">
-              <div class="score-label">Longevity</div>
-              <div class="score-track"><div class="score-fill" data-score="60"></div></div>
-              <div class="score-pips">
-                <div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip"></div><div class="pip"></div>
-              </div>
-            </div>
-          </div>
 
-          <div class="miyas-take">
-            <div class="miyas-take-label">Miya's Take</div>
-            <p>"Similar peachy tone but the shimmer reads more glitter up close and it fades significantly by midday. Not the dupe we were hoping for — save your $10 for something else."</p>
-          </div>
+            <div class="card card-back">
+              <div class="back-product">
+                <div class="back-brand">Flower Beauty</div>
+                <div class="back-name">Flower Pots Powder Blush</div>
+              </div>
+              <div class="miyas-take">
+                <div class="miyas-take-label">Miya's Take</div>
+                <p>"Similar peachy tone but the shimmer reads more glitter up close and it fades significantly by midday. Not the dupe we were hoping for — save your $10 for something else."</p>
+              </div>
+              <div class="verdict dud">
+                <span class="verdict-icon">✕</span> Dud
+              </div>
+              <div class="flip-hint">Tap to go back <span class="flip-icon">↺</span></div>
+            </div>
 
-          <div class="verdict dud">
-            <span class="verdict-icon">✕</span> Dud
           </div>
         </div>
 
@@ -688,99 +783,123 @@
 
       <div class="cards-row">
 
-        <!-- Luxury -->
-        <div class="card luxury">
-          <div class="category-tag">Foundation</div>
-          <div class="card-brand">Armani Beauty</div>
-          <div class="card-name">Luminous Silk Foundation</div>
-          <div class="card-price">$70</div>
+        <!-- Luxury flip card -->
+        <div class="card-flip luxury">
+          <div class="card-inner">
 
-          <div class="scores">
-            <div class="score-row">
-              <div class="score-label">Glow / Finish</div>
-              <div class="score-track"><div class="score-fill" data-score="100"></div></div>
-              <div class="score-pips">
-                <div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div>
+            <div class="card card-front">
+              <div class="category-tag">Foundation</div>
+              <div class="card-brand">Armani Beauty</div>
+              <div class="card-name">Luminous Silk Foundation</div>
+              <div class="card-price">$70</div>
+              <div class="scores">
+                <div class="score-row">
+                  <div class="score-label">Glow / Finish</div>
+                  <div class="score-track"><div class="score-fill" data-score="100"></div></div>
+                  <div class="score-pips">
+                    <div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div>
+                  </div>
+                </div>
+                <div class="score-row">
+                  <div class="score-label">Blendability</div>
+                  <div class="score-track"><div class="score-fill" data-score="100"></div></div>
+                  <div class="score-pips">
+                    <div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div>
+                  </div>
+                </div>
+                <div class="score-row">
+                  <div class="score-label">Shade Range</div>
+                  <div class="score-track"><div class="score-fill" data-score="100"></div></div>
+                  <div class="score-pips">
+                    <div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div>
+                  </div>
+                </div>
+                <div class="score-row">
+                  <div class="score-label">Longevity</div>
+                  <div class="score-track"><div class="score-fill" data-score="90"></div></div>
+                  <div class="score-pips">
+                    <div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled" style="opacity:.4"></div>
+                  </div>
+                </div>
               </div>
+              <div class="flip-hint">Tap for verdict <span class="flip-icon">↺</span></div>
             </div>
-            <div class="score-row">
-              <div class="score-label">Blendability</div>
-              <div class="score-track"><div class="score-fill" data-score="100"></div></div>
-              <div class="score-pips">
-                <div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div>
-              </div>
-            </div>
-            <div class="score-row">
-              <div class="score-label">Shade Range</div>
-              <div class="score-track"><div class="score-fill" data-score="100"></div></div>
-              <div class="score-pips">
-                <div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div>
-              </div>
-            </div>
-            <div class="score-row">
-              <div class="score-label">Longevity</div>
-              <div class="score-track"><div class="score-fill" data-score="90"></div></div>
-              <div class="score-pips">
-                <div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled" style="opacity:.4"></div>
-              </div>
-            </div>
-          </div>
 
-          <div class="miyas-take">
-            <div class="miyas-take-label">Miya's Take</div>
-            <p>"The benchmark for a satin-skin foundation. Blurs imperfections without masking skin texture, and the 40-shade range is genuinely inclusive. It photographs beautifully."</p>
-          </div>
+            <div class="card card-back">
+              <div class="back-product">
+                <div class="back-brand">Armani Beauty</div>
+                <div class="back-name">Luminous Silk Foundation</div>
+              </div>
+              <div class="miyas-take">
+                <div class="miyas-take-label">Miya's Take</div>
+                <p>"The benchmark for a satin-skin foundation. Blurs imperfections without masking skin texture, and the 40-shade range is genuinely inclusive. It photographs beautifully."</p>
+              </div>
+              <div class="verdict approved">
+                <span class="verdict-icon">✦</span> Dupe Approved Reference
+              </div>
+              <div class="flip-hint">Tap to go back <span class="flip-icon">↺</span></div>
+            </div>
 
-          <div class="verdict approved">
-            <span class="verdict-icon">✦</span> Dupe Approved Reference
           </div>
         </div>
 
-        <!-- Dupe -->
-        <div class="card dupe">
-          <div class="category-tag">Foundation</div>
-          <div class="card-brand">L'Oréal Paris</div>
-          <div class="card-name">True Match Lumi Foundation</div>
-          <div class="card-price">$13</div>
+        <!-- Dupe flip card -->
+        <div class="card-flip dupe">
+          <div class="card-inner">
 
-          <div class="scores">
-            <div class="score-row">
-              <div class="score-label">Glow / Finish</div>
-              <div class="score-track"><div class="score-fill" data-score="90"></div></div>
-              <div class="score-pips">
-                <div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled" style="opacity:.4"></div>
+            <div class="card card-front">
+              <div class="category-tag">Foundation</div>
+              <div class="card-brand">L'Oréal Paris</div>
+              <div class="card-name">True Match Lumi Foundation</div>
+              <div class="card-price">$13</div>
+              <div class="scores">
+                <div class="score-row">
+                  <div class="score-label">Glow / Finish</div>
+                  <div class="score-track"><div class="score-fill" data-score="90"></div></div>
+                  <div class="score-pips">
+                    <div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled" style="opacity:.4"></div>
+                  </div>
+                </div>
+                <div class="score-row">
+                  <div class="score-label">Blendability</div>
+                  <div class="score-track"><div class="score-fill" data-score="90"></div></div>
+                  <div class="score-pips">
+                    <div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled" style="opacity:.4"></div>
+                  </div>
+                </div>
+                <div class="score-row">
+                  <div class="score-label">Shade Range</div>
+                  <div class="score-track"><div class="score-fill" data-score="90"></div></div>
+                  <div class="score-pips">
+                    <div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled" style="opacity:.4"></div>
+                  </div>
+                </div>
+                <div class="score-row">
+                  <div class="score-label">Longevity</div>
+                  <div class="score-track"><div class="score-fill" data-score="80"></div></div>
+                  <div class="score-pips">
+                    <div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip"></div>
+                  </div>
+                </div>
               </div>
+              <div class="flip-hint">Tap for verdict <span class="flip-icon">↺</span></div>
             </div>
-            <div class="score-row">
-              <div class="score-label">Blendability</div>
-              <div class="score-track"><div class="score-fill" data-score="90"></div></div>
-              <div class="score-pips">
-                <div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled" style="opacity:.4"></div>
-              </div>
-            </div>
-            <div class="score-row">
-              <div class="score-label">Shade Range</div>
-              <div class="score-track"><div class="score-fill" data-score="90"></div></div>
-              <div class="score-pips">
-                <div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled" style="opacity:.4"></div>
-              </div>
-            </div>
-            <div class="score-row">
-              <div class="score-label">Longevity</div>
-              <div class="score-track"><div class="score-fill" data-score="80"></div></div>
-              <div class="score-pips">
-                <div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip"></div>
-              </div>
-            </div>
-          </div>
 
-          <div class="miyas-take">
-            <div class="miyas-take-label">Miya's Take</div>
-            <p>"This is embarrassingly good for $13. The luminous finish is nearly identical in photos, the shade range holds up, and it blends like a dream. An absolute steal."</p>
-          </div>
+            <div class="card card-back">
+              <div class="back-product">
+                <div class="back-brand">L'Oréal Paris</div>
+                <div class="back-name">True Match Lumi Foundation</div>
+              </div>
+              <div class="miyas-take">
+                <div class="miyas-take-label">Miya's Take</div>
+                <p>"This is embarrassingly good for $13. The luminous finish is nearly identical in photos, the shade range holds up, and it blends like a dream. An absolute steal."</p>
+              </div>
+              <div class="verdict approved">
+                <span class="verdict-icon">✓</span> Dupe Approved
+              </div>
+              <div class="flip-hint">Tap to go back <span class="flip-icon">↺</span></div>
+            </div>
 
-          <div class="verdict approved">
-            <span class="verdict-icon">✓</span> Dupe Approved
           </div>
         </div>
 
@@ -795,19 +914,24 @@
   </footer>
 
   <script>
+    // ─── Flip interaction ───
+    document.querySelectorAll('.card-flip').forEach(flip => {
+      flip.addEventListener('click', () => flip.classList.toggle('flipped'));
+    });
+
+    // ─── Animated score bars ───
     const fills = document.querySelectorAll('.score-fill[data-score]');
-    const animate = (entries, observer) => {
+    const observer = new IntersectionObserver((entries, obs) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           const el = entry.target;
-          // Small delay so the card entrance is visible first
           setTimeout(() => { el.style.width = el.dataset.score + '%'; }, 120);
-          observer.unobserve(el);
+          obs.unobserve(el);
         }
       });
-    };
-    const observer = new IntersectionObserver(animate, { threshold: 0.3 });
+    }, { threshold: 0.3 });
     fills.forEach(el => observer.observe(el));
   </script>
+
 </body>
 </html>
