@@ -79,12 +79,21 @@
 
     .site-logo span { color: var(--accent); }
 
-    .header-tag {
-      font-size: 0.7rem;
-      font-weight: 500;
-      letter-spacing: 0.14em;
+    .header-nav-link {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: var(--warm-gray);
+      color: var(--charcoal);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+      padding-bottom: 1px;
+    }
+
+    .header-nav-link:hover {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
     }
 
     /* ─── Hero ─── */
@@ -130,6 +139,152 @@
       margin: 0 auto;
     }
 
+    /* ─── Search UI ─── */
+    .search-wrap {
+      margin: 2.5rem auto 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      max-width: 600px;
+      width: 100%;
+    }
+
+    .search-box {
+      display: flex;
+      width: 100%;
+      border: 2px solid var(--ink);
+    }
+
+    .search-box input {
+      flex: 1;
+      padding: 1rem 1.25rem;
+      font-size: 0.95rem;
+      font-family: 'Inter', sans-serif;
+      border: none;
+      outline: none;
+      background: #fff;
+      color: var(--ink);
+      min-width: 0;
+    }
+
+    .search-box input::placeholder {
+      color: var(--warm-gray);
+      font-weight: 300;
+    }
+
+    .search-btn {
+      padding: 1rem 1.75rem;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      cursor: pointer;
+      white-space: nowrap;
+      font-family: 'Inter', sans-serif;
+      transition: background 0.2s;
+      flex-shrink: 0;
+    }
+
+    .search-btn:hover:not(:disabled) { background: #c0001a; }
+    .search-btn:disabled { opacity: 0.55; cursor: not-allowed; }
+
+    /* ─── API Key Section ─── */
+    .api-key-section {
+      width: 100%;
+      max-width: 600px;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .api-key-label {
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--warm-gray);
+    }
+
+    .api-key-row {
+      display: flex;
+      border: 1px solid var(--border);
+    }
+
+    .api-key-row input {
+      flex: 1;
+      padding: 0.65rem 0.9rem;
+      font-size: 0.82rem;
+      font-family: 'Inter', sans-serif;
+      border: none;
+      outline: none;
+      background: #fff;
+      color: var(--ink);
+      min-width: 0;
+    }
+
+    .api-key-row button {
+      padding: 0.65rem 1.1rem;
+      background: var(--charcoal);
+      color: #fff;
+      border: none;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      white-space: nowrap;
+      transition: background 0.2s;
+      flex-shrink: 0;
+    }
+
+    .api-key-row button:hover { background: #444; }
+
+    .api-key-note {
+      font-size: 0.67rem;
+      color: var(--warm-gray);
+      line-height: 1.5;
+    }
+
+    .api-key-change {
+      font-size: 0.67rem;
+      color: var(--warm-gray);
+      text-align: right;
+      cursor: pointer;
+      text-decoration: underline;
+      background: none;
+      border: none;
+      font-family: 'Inter', sans-serif;
+      padding: 0;
+    }
+
+    .api-key-change:hover { color: var(--accent); }
+
+    /* ─── Picks link ─── */
+    .picks-link {
+      margin-top: 0.5rem;
+      font-size: 0.82rem;
+      color: var(--warm-gray);
+      text-align: center;
+    }
+
+    .picks-link a {
+      color: var(--ink);
+      font-weight: 600;
+      text-decoration: none;
+      border-bottom: 1px solid var(--ink);
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .picks-link a:hover {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+    }
+
     /* ─── Divider ─── */
     .divider {
       display: flex;
@@ -148,6 +303,98 @@
       text-transform: uppercase;
       color: var(--warm-gray);
       white-space: nowrap;
+    }
+
+    /* ─── Result section ─── */
+    .result-section { background: #ffffff; }
+
+    .result-section main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem 4rem;
+      background: #ffffff;
+    }
+
+    .search-again-wrap {
+      text-align: center;
+      padding-top: 1rem;
+      padding-bottom: 2rem;
+    }
+
+    .search-again-btn {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--warm-gray);
+      background: none;
+      border: 1px solid var(--border);
+      padding: 0.6em 1.4em;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .search-again-btn:hover {
+      border-color: var(--charcoal);
+      color: var(--charcoal);
+    }
+
+    /* ─── Loading state ─── */
+    .loading-state {
+      text-align: center;
+      padding: 4rem 2rem;
+    }
+
+    .loading-dots {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      margin-bottom: 1.25rem;
+    }
+
+    .loading-dots span {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      animation: pulse 1.2s ease-in-out infinite;
+    }
+
+    .loading-dots span:nth-child(2) { animation-delay: 0.2s; }
+    .loading-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes pulse {
+      0%, 80%, 100% { opacity: 0.25; transform: scale(0.85); }
+      40% { opacity: 1; transform: scale(1); }
+    }
+
+    .loading-text {
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--warm-gray);
+      font-weight: 500;
+    }
+
+    /* ─── Error state ─── */
+    .error-state {
+      text-align: center;
+      padding: 3rem;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .error-state p {
+      font-size: 0.88rem;
+      color: var(--warm-gray);
+      line-height: 1.8;
+    }
+
+    .error-state p:first-child {
+      color: var(--dud);
+      font-weight: 500;
+      margin-bottom: 0.5rem;
     }
 
     /* ─── Main layout ─── */
@@ -234,7 +481,7 @@
       box-shadow: var(--shadow-hover);
     }
 
-    /* ORIGINAL / DUPE labels — on the front face via parent class */
+    /* ORIGINAL / DUPE labels */
     .card-flip.luxury .card-front::before {
       content: 'ORIGINAL';
       position: absolute;
@@ -462,122 +709,6 @@
 
     .verdict-icon { font-size: 1rem; line-height: 1; }
 
-    /* ─── Savings Calculator ─── */
-    .savings-section {
-      max-width: 1200px;
-      margin: 0 auto 5rem;
-      padding: 0 2rem;
-      background: #ffffff;
-    }
-
-    .savings-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      padding: 3rem 2.5rem;
-      box-shadow: var(--shadow);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 2.5rem;
-    }
-
-    .savings-totals {
-      display: grid;
-      grid-template-columns: 1fr auto 1fr;
-      align-items: center;
-      gap: 2rem;
-      width: 100%;
-      max-width: 640px;
-    }
-
-    .savings-col {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.5rem;
-      text-align: center;
-    }
-
-    .savings-col-label {
-      font-size: 0.65rem;
-      font-weight: 600;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--warm-gray);
-    }
-
-    .savings-col-total {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.6rem;
-      font-weight: 600;
-      line-height: 1;
-      letter-spacing: -0.02em;
-    }
-
-    .savings-col.luxury-col .savings-col-total { color: var(--charcoal); }
-    .savings-col.dupe-col   .savings-col-total { color: var(--approved); }
-
-    .savings-col-sub {
-      font-size: 0.72rem;
-      color: var(--warm-gray);
-      font-weight: 400;
-    }
-
-    .savings-vs {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: var(--parchment);
-      border: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.62rem;
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      color: var(--warm-gray);
-      flex-shrink: 0;
-    }
-
-    .savings-divider {
-      width: 100%;
-      max-width: 640px;
-      height: 1px;
-      background: var(--border);
-    }
-
-    .savings-callout {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.6rem;
-      text-align: center;
-    }
-
-    .savings-callout-amount {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(3.5rem, 8vw, 5.5rem);
-      font-weight: 600;
-      color: var(--accent);
-      line-height: 1;
-      letter-spacing: -0.03em;
-    }
-
-    .savings-callout-line {
-      font-size: 0.88rem;
-      color: var(--warm-gray);
-      font-weight: 400;
-      line-height: 1.5;
-      max-width: 340px;
-    }
-
-    @media (max-width: 700px) {
-      .savings-section { padding: 0 1.25rem; }
-      .savings-card    { padding: 2rem 1.5rem; gap: 2rem; }
-      .savings-col-total { font-size: 2rem; }
-    }
-
     /* ─── Footer ─── */
     footer {
       text-align: center;
@@ -595,6 +726,9 @@
       .hero { padding: 3rem 1.5rem 2.5rem; }
       main { padding: 0 1.25rem 4rem; }
       header { padding: 0 1.25rem; }
+      .search-box { flex-direction: column; border: none; gap: 0; }
+      .search-box input { border: 2px solid var(--ink); margin-bottom: 0.5rem; }
+      .search-btn { width: 100%; }
     }
   </style>
 </head>
@@ -604,496 +738,340 @@
   <header>
     <div class="header-inner">
       <div class="site-logo">Dupe <span>or</span> Dud</div>
-      <div class="header-tag">By Miya · Beauty Reviews</div>
+      <a href="picks.html" class="header-nav-link">Miya's Picks &rarr;</a>
     </div>
   </header>
 
-  <!-- Hero -->
+  <!-- Hero + Search -->
   <section class="hero">
     <div class="hero-eyebrow">The Honest Edit</div>
     <h1>Beauty without <em>the markup.</em></h1>
-    <p>Side-by-side scores on the products beauty lovers are talking about — so you know exactly where to spend and where to save.</p>
+    <p>Type any luxury beauty product and get an honest dupe verdict — scored and reviewed, just like the real thing.</p>
+
+    <div class="search-wrap">
+      <div class="search-box">
+        <input id="search-input" type="text" placeholder="e.g. Charlotte Tilbury Flawless Filter" autocomplete="off" />
+        <button id="search-btn" class="search-btn">Find My Dupe</button>
+      </div>
+
+      <!-- API key section -->
+      <div id="api-key-section" class="api-key-section" style="display:none">
+        <div class="api-key-label">Anthropic API Key Required</div>
+        <div class="api-key-row">
+          <input id="api-key-input" type="password" placeholder="sk-ant-..." autocomplete="off" />
+          <button id="api-key-save">Save Key</button>
+        </div>
+        <p class="api-key-note">Your key is saved locally in your browser and sent only to Anthropic's API. <a href="https://console.anthropic.com/" target="_blank" rel="noopener" style="color:var(--charcoal)">Get a key →</a></p>
+      </div>
+
+      <div id="api-key-set-row" style="display:none; width:100%; text-align:right;">
+        <button id="api-key-change" class="api-key-change">Change API key</button>
+      </div>
+    </div>
+
+    <p class="picks-link" style="margin-top:1.5rem;">Not sure where to start? <a href="picks.html">See Miya's picks &rarr;</a></p>
   </section>
 
-  <!-- Main content -->
-  <main>
-
-    <!-- ─── Comparison 1: Lip ─── -->
-    <div class="divider">
+  <!-- Result section (hidden until search completes) -->
+  <div id="result-section" style="display:none">
+    <div class="divider" style="padding-top:2rem;">
       <div class="divider-line"></div>
-      <div class="divider-label">Review No. 01</div>
+      <div class="divider-label" id="result-label">Your Dupe Match</div>
       <div class="divider-line"></div>
     </div>
-
-    <div class="comparison">
-      <div class="comparison-header">
-        <div class="comparison-title">Charlotte Tilbury vs. e.l.f.</div>
-        <div class="vs-badge">VS</div>
-        <div class="comparison-title" style="text-align:right;">Lip Liner Showdown</div>
-      </div>
-
-      <div class="cards-row">
-
-        <!-- Luxury flip card -->
-        <div class="card-flip luxury">
-          <div class="card-inner">
-
-            <div class="card card-front">
-              <div class="category-tag">Lip</div>
-              <div class="card-brand">Charlotte Tilbury</div>
-              <div class="card-name">Lip Cheat Lip Liner</div>
-              <div class="card-price">$28</div>
-              <div class="scores">
-                <div class="score-row">
-                  <div class="score-label">Glow / Finish</div>
-                  <div class="score-track"><div class="score-fill" data-score="90"></div></div>
-                  <div class="score-pips">
-                    <div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled" style="opacity:.4"></div>
-                  </div>
-                </div>
-                <div class="score-row">
-                  <div class="score-label">Blendability</div>
-                  <div class="score-track"><div class="score-fill" data-score="100"></div></div>
-                  <div class="score-pips">
-                    <div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div>
-                  </div>
-                </div>
-                <div class="score-row">
-                  <div class="score-label">Shade Range</div>
-                  <div class="score-track"><div class="score-fill" data-score="90"></div></div>
-                  <div class="score-pips">
-                    <div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled" style="opacity:.4"></div>
-                  </div>
-                </div>
-                <div class="score-row">
-                  <div class="score-label">Longevity</div>
-                  <div class="score-track"><div class="score-fill" data-score="80"></div></div>
-                  <div class="score-pips">
-                    <div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip"></div>
-                  </div>
-                </div>
-              </div>
-              <div class="flip-hint">Tap for verdict <span class="flip-icon">↺</span></div>
-            </div>
-
-            <div class="card card-back">
-              <div class="back-product">
-                <div class="back-brand">Charlotte Tilbury</div>
-                <div class="back-name">Lip Cheat Lip Liner</div>
-              </div>
-              <div class="miyas-take">
-                <div class="miyas-take-label">Miya's Take</div>
-                <p>"The gold standard for a reason. Feathers into the lip perfectly and the pigment is consistently rich. Worth every penny — but is it worth six times the price?"</p>
-              </div>
-              <div class="verdict approved">
-                <span class="verdict-icon">✦</span> Dupe Approved Reference
-              </div>
-              <div class="flip-hint">Tap to go back <span class="flip-icon">↺</span></div>
-            </div>
-
-          </div>
-        </div>
-
-        <!-- Dupe flip card -->
-        <div class="card-flip dupe">
-          <div class="card-inner">
-
-            <div class="card card-front">
-              <div class="category-tag">Lip</div>
-              <div class="card-brand">e.l.f. Cosmetics</div>
-              <div class="card-name">No Budge Lip Liner</div>
-              <div class="card-price">$8</div>
-              <div class="scores">
-                <div class="score-row">
-                  <div class="score-label">Glow / Finish</div>
-                  <div class="score-track"><div class="score-fill" data-score="70"></div></div>
-                  <div class="score-pips">
-                    <div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled" style="opacity:.4"></div><div class="pip"></div>
-                  </div>
-                </div>
-                <div class="score-row">
-                  <div class="score-label">Blendability</div>
-                  <div class="score-track"><div class="score-fill" data-score="80"></div></div>
-                  <div class="score-pips">
-                    <div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip"></div>
-                  </div>
-                </div>
-                <div class="score-row">
-                  <div class="score-label">Shade Range</div>
-                  <div class="score-track"><div class="score-fill" data-score="70"></div></div>
-                  <div class="score-pips">
-                    <div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled" style="opacity:.4"></div><div class="pip"></div>
-                  </div>
-                </div>
-                <div class="score-row">
-                  <div class="score-label">Longevity</div>
-                  <div class="score-track"><div class="score-fill" data-score="90"></div></div>
-                  <div class="score-pips">
-                    <div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled" style="opacity:.4"></div>
-                  </div>
-                </div>
-              </div>
-              <div class="flip-hint">Tap for verdict <span class="flip-icon">↺</span></div>
-            </div>
-
-            <div class="card card-back">
-              <div class="back-product">
-                <div class="back-brand">e.l.f. Cosmetics</div>
-                <div class="back-name">No Budge Lip Liner</div>
-              </div>
-              <div class="miyas-take">
-                <div class="miyas-take-label">Miya's Take</div>
-                <p>"Shockingly close. The formula isn't quite as creamy but it actually outlasts the CT on my oily skin. At $8, this is an easy yes — grab three shades."</p>
-              </div>
-              <div class="verdict approved">
-                <span class="verdict-icon">✓</span> Dupe Approved
-              </div>
-              <div class="flip-hint">Tap to go back <span class="flip-icon">↺</span></div>
-            </div>
-
-          </div>
-        </div>
-
-      </div>
+    <div class="result-section">
+      <main id="result-main"></main>
     </div>
-
-    <!-- ─── Comparison 2: Blush ─── -->
-    <div class="divider">
-      <div class="divider-line"></div>
-      <div class="divider-label">Review No. 02</div>
-      <div class="divider-line"></div>
+    <div class="search-again-wrap">
+      <button class="search-again-btn" id="search-again-btn">Search Another Product</button>
     </div>
-
-    <div class="comparison">
-      <div class="comparison-header">
-        <div class="comparison-title">NARS vs. Flower Beauty</div>
-        <div class="vs-badge">VS</div>
-        <div class="comparison-title" style="text-align:right;">Blush Battle</div>
-      </div>
-
-      <div class="cards-row">
-
-        <!-- Luxury flip card -->
-        <div class="card-flip luxury">
-          <div class="card-inner">
-
-            <div class="card card-front">
-              <div class="category-tag">Blush</div>
-              <div class="card-brand">NARS</div>
-              <div class="card-name">Orgasm Blush</div>
-              <div class="card-price">$38</div>
-              <div class="scores">
-                <div class="score-row">
-                  <div class="score-label">Glow / Finish</div>
-                  <div class="score-track"><div class="score-fill" data-score="100"></div></div>
-                  <div class="score-pips">
-                    <div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div>
-                  </div>
-                </div>
-                <div class="score-row">
-                  <div class="score-label">Blendability</div>
-                  <div class="score-track"><div class="score-fill" data-score="100"></div></div>
-                  <div class="score-pips">
-                    <div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div>
-                  </div>
-                </div>
-                <div class="score-row">
-                  <div class="score-label">Shade Range</div>
-                  <div class="score-track"><div class="score-fill" data-score="60"></div></div>
-                  <div class="score-pips">
-                    <div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip"></div><div class="pip"></div>
-                  </div>
-                </div>
-                <div class="score-row">
-                  <div class="score-label">Longevity</div>
-                  <div class="score-track"><div class="score-fill" data-score="80"></div></div>
-                  <div class="score-pips">
-                    <div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip"></div>
-                  </div>
-                </div>
-              </div>
-              <div class="flip-hint">Tap for verdict <span class="flip-icon">↺</span></div>
-            </div>
-
-            <div class="card card-back">
-              <div class="back-product">
-                <div class="back-brand">NARS</div>
-                <div class="back-name">Orgasm Blush</div>
-              </div>
-              <div class="miyas-take">
-                <div class="miyas-take-label">Miya's Take</div>
-                <p>"The iconic peachy-nude glow that works on almost every skin tone. The shimmer is finely milled — never chunky. An industry legend for good reason."</p>
-              </div>
-              <div class="verdict approved">
-                <span class="verdict-icon">✦</span> Dupe Approved Reference
-              </div>
-              <div class="flip-hint">Tap to go back <span class="flip-icon">↺</span></div>
-            </div>
-
-          </div>
-        </div>
-
-        <!-- Dupe flip card -->
-        <div class="card-flip dupe">
-          <div class="card-inner">
-
-            <div class="card card-front">
-              <div class="category-tag">Blush</div>
-              <div class="card-brand">Flower Beauty</div>
-              <div class="card-name">Flower Pots Powder Blush</div>
-              <div class="card-price">$10</div>
-              <div class="scores">
-                <div class="score-row">
-                  <div class="score-label">Glow / Finish</div>
-                  <div class="score-track"><div class="score-fill" data-score="60"></div></div>
-                  <div class="score-pips">
-                    <div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip"></div><div class="pip"></div>
-                  </div>
-                </div>
-                <div class="score-row">
-                  <div class="score-label">Blendability</div>
-                  <div class="score-track"><div class="score-fill" data-score="80"></div></div>
-                  <div class="score-pips">
-                    <div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip"></div>
-                  </div>
-                </div>
-                <div class="score-row">
-                  <div class="score-label">Shade Range</div>
-                  <div class="score-track"><div class="score-fill" data-score="80"></div></div>
-                  <div class="score-pips">
-                    <div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip"></div>
-                  </div>
-                </div>
-                <div class="score-row">
-                  <div class="score-label">Longevity</div>
-                  <div class="score-track"><div class="score-fill" data-score="60"></div></div>
-                  <div class="score-pips">
-                    <div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip"></div><div class="pip"></div>
-                  </div>
-                </div>
-              </div>
-              <div class="flip-hint">Tap for verdict <span class="flip-icon">↺</span></div>
-            </div>
-
-            <div class="card card-back">
-              <div class="back-product">
-                <div class="back-brand">Flower Beauty</div>
-                <div class="back-name">Flower Pots Powder Blush</div>
-              </div>
-              <div class="miyas-take">
-                <div class="miyas-take-label">Miya's Take</div>
-                <p>"Similar peachy tone but the shimmer reads more glitter up close and it fades significantly by midday. Not the dupe we were hoping for — save your $10 for something else."</p>
-              </div>
-              <div class="verdict dud">
-                <span class="verdict-icon">✕</span> Dud
-              </div>
-              <div class="flip-hint">Tap to go back <span class="flip-icon">↺</span></div>
-            </div>
-
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- ─── Comparison 3: Foundation ─── -->
-    <div class="divider">
-      <div class="divider-line"></div>
-      <div class="divider-label">Review No. 03</div>
-      <div class="divider-line"></div>
-    </div>
-
-    <div class="comparison">
-      <div class="comparison-header">
-        <div class="comparison-title">Armani Beauty vs. L'Oréal</div>
-        <div class="vs-badge">VS</div>
-        <div class="comparison-title" style="text-align:right;">Foundation Face-Off</div>
-      </div>
-
-      <div class="cards-row">
-
-        <!-- Luxury flip card -->
-        <div class="card-flip luxury">
-          <div class="card-inner">
-
-            <div class="card card-front">
-              <div class="category-tag">Foundation</div>
-              <div class="card-brand">Armani Beauty</div>
-              <div class="card-name">Luminous Silk Foundation</div>
-              <div class="card-price">$70</div>
-              <div class="scores">
-                <div class="score-row">
-                  <div class="score-label">Glow / Finish</div>
-                  <div class="score-track"><div class="score-fill" data-score="100"></div></div>
-                  <div class="score-pips">
-                    <div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div>
-                  </div>
-                </div>
-                <div class="score-row">
-                  <div class="score-label">Blendability</div>
-                  <div class="score-track"><div class="score-fill" data-score="100"></div></div>
-                  <div class="score-pips">
-                    <div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div>
-                  </div>
-                </div>
-                <div class="score-row">
-                  <div class="score-label">Shade Range</div>
-                  <div class="score-track"><div class="score-fill" data-score="100"></div></div>
-                  <div class="score-pips">
-                    <div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div>
-                  </div>
-                </div>
-                <div class="score-row">
-                  <div class="score-label">Longevity</div>
-                  <div class="score-track"><div class="score-fill" data-score="90"></div></div>
-                  <div class="score-pips">
-                    <div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled" style="opacity:.4"></div>
-                  </div>
-                </div>
-              </div>
-              <div class="flip-hint">Tap for verdict <span class="flip-icon">↺</span></div>
-            </div>
-
-            <div class="card card-back">
-              <div class="back-product">
-                <div class="back-brand">Armani Beauty</div>
-                <div class="back-name">Luminous Silk Foundation</div>
-              </div>
-              <div class="miyas-take">
-                <div class="miyas-take-label">Miya's Take</div>
-                <p>"The benchmark for a satin-skin foundation. Blurs imperfections without masking skin texture, and the 40-shade range is genuinely inclusive. It photographs beautifully."</p>
-              </div>
-              <div class="verdict approved">
-                <span class="verdict-icon">✦</span> Dupe Approved Reference
-              </div>
-              <div class="flip-hint">Tap to go back <span class="flip-icon">↺</span></div>
-            </div>
-
-          </div>
-        </div>
-
-        <!-- Dupe flip card -->
-        <div class="card-flip dupe">
-          <div class="card-inner">
-
-            <div class="card card-front">
-              <div class="category-tag">Foundation</div>
-              <div class="card-brand">L'Oréal Paris</div>
-              <div class="card-name">True Match Lumi Foundation</div>
-              <div class="card-price">$13</div>
-              <div class="scores">
-                <div class="score-row">
-                  <div class="score-label">Glow / Finish</div>
-                  <div class="score-track"><div class="score-fill" data-score="90"></div></div>
-                  <div class="score-pips">
-                    <div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled" style="opacity:.4"></div>
-                  </div>
-                </div>
-                <div class="score-row">
-                  <div class="score-label">Blendability</div>
-                  <div class="score-track"><div class="score-fill" data-score="90"></div></div>
-                  <div class="score-pips">
-                    <div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled" style="opacity:.4"></div>
-                  </div>
-                </div>
-                <div class="score-row">
-                  <div class="score-label">Shade Range</div>
-                  <div class="score-track"><div class="score-fill" data-score="90"></div></div>
-                  <div class="score-pips">
-                    <div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled" style="opacity:.4"></div>
-                  </div>
-                </div>
-                <div class="score-row">
-                  <div class="score-label">Longevity</div>
-                  <div class="score-track"><div class="score-fill" data-score="80"></div></div>
-                  <div class="score-pips">
-                    <div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip"></div>
-                  </div>
-                </div>
-              </div>
-              <div class="flip-hint">Tap for verdict <span class="flip-icon">↺</span></div>
-            </div>
-
-            <div class="card card-back">
-              <div class="back-product">
-                <div class="back-brand">L'Oréal Paris</div>
-                <div class="back-name">True Match Lumi Foundation</div>
-              </div>
-              <div class="miyas-take">
-                <div class="miyas-take-label">Miya's Take</div>
-                <p>"This is embarrassingly good for $13. The luminous finish is nearly identical in photos, the shade range holds up, and it blends like a dream. An absolute steal."</p>
-              </div>
-              <div class="verdict approved">
-                <span class="verdict-icon">✓</span> Dupe Approved
-              </div>
-              <div class="flip-hint">Tap to go back <span class="flip-icon">↺</span></div>
-            </div>
-
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-  </main>
-
-  <!-- Savings Calculator -->
-  <div class="divider" style="max-width:1200px;margin:0 auto 1.5rem;padding:0 2rem;">
-    <div class="divider-line"></div>
-    <div class="divider-label">Dupe Savings Calculator</div>
-    <div class="divider-line"></div>
   </div>
-
-  <section class="savings-section">
-    <div class="savings-card">
-
-      <div class="savings-totals">
-        <div class="savings-col luxury-col">
-          <div class="savings-col-label">All Luxury</div>
-          <div class="savings-col-total">$136</div>
-          <div class="savings-col-sub">CT + NARS + Armani</div>
-        </div>
-        <div class="savings-vs">VS</div>
-        <div class="savings-col dupe-col">
-          <div class="savings-col-label">All Dupes</div>
-          <div class="savings-col-total">$31</div>
-          <div class="savings-col-sub">e.l.f. + Flower Beauty + L'Oréal</div>
-        </div>
-      </div>
-
-      <div class="savings-divider"></div>
-
-      <div class="savings-callout">
-        <div class="savings-callout-amount">$105</div>
-        <div class="savings-callout-line">That's how much you'd save by buying all the dupes — enough for a whole new haul.</div>
-      </div>
-
-    </div>
-  </section>
 
   <!-- Footer -->
   <footer>
-    <p>All scores are Miya's independent assessments. No sponsorships. <strong>Dupe or Dud</strong> — because your wallet deserves an honest answer.</p>
+    <p>All scores generated by AI based on publicly available reviews. <strong>Dupe or Dud</strong> — because your wallet deserves an honest answer.</p>
   </footer>
 
   <script>
-    // ─── Flip interaction ───
-    document.querySelectorAll('.card-flip').forEach(flip => {
-      flip.addEventListener('click', () => flip.classList.toggle('flipped'));
+    const STORAGE_KEY = 'dupe_anthropic_key';
+    const MODEL = 'claude-sonnet-4-20250514';
+
+    // ─── DOM refs ───
+    const searchInput   = document.getElementById('search-input');
+    const searchBtn     = document.getElementById('search-btn');
+    const apiKeySection = document.getElementById('api-key-section');
+    const apiKeySetRow  = document.getElementById('api-key-set-row');
+    const apiKeyInput   = document.getElementById('api-key-input');
+    const apiKeySave    = document.getElementById('api-key-save');
+    const apiKeyChange  = document.getElementById('api-key-change');
+    const resultSection = document.getElementById('result-section');
+    const resultMain    = document.getElementById('result-main');
+    const searchAgainBtn = document.getElementById('search-again-btn');
+
+    // ─── Key management ───
+    function getKey()  { return localStorage.getItem(STORAGE_KEY) || ''; }
+    function hasKey()  { return !!getKey(); }
+
+    function updateKeyUI() {
+      if (hasKey()) {
+        apiKeySection.style.display = 'none';
+        apiKeySetRow.style.display  = 'block';
+      } else {
+        apiKeySection.style.display = 'flex';
+        apiKeySetRow.style.display  = 'none';
+      }
+    }
+
+    apiKeySave.addEventListener('click', () => {
+      const val = apiKeyInput.value.trim();
+      if (!val) return;
+      localStorage.setItem(STORAGE_KEY, val);
+      apiKeyInput.value = '';
+      updateKeyUI();
     });
 
-    // ─── Animated score bars ───
-    const fills = document.querySelectorAll('.score-fill[data-score]');
-    const observer = new IntersectionObserver((entries, obs) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const el = entry.target;
-          setTimeout(() => { el.style.width = el.dataset.score + '%'; }, 120);
-          obs.unobserve(el);
-        }
+    apiKeyInput.addEventListener('keydown', e => {
+      if (e.key === 'Enter') apiKeySave.click();
+    });
+
+    apiKeyChange.addEventListener('click', () => {
+      localStorage.removeItem(STORAGE_KEY);
+      updateKeyUI();
+      apiKeyInput.focus();
+    });
+
+    updateKeyUI();
+
+    // ─── Search triggers ───
+    searchBtn.addEventListener('click', handleSearch);
+    searchInput.addEventListener('keydown', e => { if (e.key === 'Enter') handleSearch(); });
+    searchAgainBtn.addEventListener('click', () => {
+      resultSection.style.display = 'none';
+      searchInput.focus();
+      searchInput.select();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // ─── Main search handler ───
+    async function handleSearch() {
+      const query = searchInput.value.trim();
+      if (!query) { searchInput.focus(); return; }
+
+      if (!hasKey()) {
+        apiKeySection.style.display = 'flex';
+        apiKeyInput.focus();
+        return;
+      }
+
+      setLoading(true);
+
+      try {
+        const data = await fetchDupe(query, getKey());
+        renderResult(data, query);
+      } catch (err) {
+        renderError(err.message || 'Something went wrong. Please try again.');
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    // ─── Claude API call ───
+    async function fetchDupe(product, apiKey) {
+      const prompt =
+        `You are Miya, a beauty product expert who writes honest, no-nonsense reviews.\n` +
+        `A reader wants to find a drugstore dupe for: "${product}"\n\n` +
+        `Respond with ONLY a valid JSON object — no markdown, no code fences, no explanation.\n` +
+        `Use exactly this structure:\n` +
+        `{\n` +
+        `  "category": "e.g. Foundation, Blush, Lip Oil, Mascara",\n` +
+        `  "luxury": {\n` +
+        `    "brand": "Brand Name",\n` +
+        `    "name": "Full Product Name",\n` +
+        `    "price": 45,\n` +
+        `    "scores": { "glow": 5, "blendability": 5, "shadeRange": 4, "longevity": 4 },\n` +
+        `    "review": "2-3 sentences in first-person, honest voice."\n` +
+        `  },\n` +
+        `  "dupe": {\n` +
+        `    "brand": "Brand Name",\n` +
+        `    "name": "Full Product Name",\n` +
+        `    "price": 12,\n` +
+        `    "scores": { "glow": 4, "blendability": 4, "shadeRange": 3, "longevity": 4 },\n` +
+        `    "review": "2-3 sentences in first-person, honest voice."\n` +
+        `  },\n` +
+        `  "verdict": "approved"\n` +
+        `}\n\n` +
+        `Rules:\n` +
+        `- verdict must be exactly "approved" or "dud" (lowercase only)\n` +
+        `- All scores are integers 1 through 5\n` +
+        `- price is a number with no currency symbol\n` +
+        `- If the input is vague, suggest the best known match\n` +
+        `- If there is no convincing dupe, return verdict "dud" and explain why in the dupe review`;
+
+      const res = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-api-key': apiKey,
+          'anthropic-version': '2023-06-01',
+          'anthropic-dangerous-direct-browser-access': 'true'
+        },
+        body: JSON.stringify({
+          model: MODEL,
+          max_tokens: 1024,
+          messages: [{ role: 'user', content: prompt }]
+        })
       });
-    }, { threshold: 0.3 });
-    fills.forEach(el => observer.observe(el));
+
+      if (!res.ok) {
+        const errBody = await res.json().catch(() => ({}));
+        const msg = errBody?.error?.message || `API error ${res.status}`;
+        if (res.status === 401) throw new Error('Invalid API key — check your key and try again.');
+        if (res.status === 429) throw new Error('Rate limit reached — wait a moment and try again.');
+        throw new Error(msg);
+      }
+
+      const json = await res.json();
+      const raw  = json.content[0].text.trim();
+
+      // Strip any accidental markdown code fences
+      const clean = raw.replace(/^```(?:json)?\s*/i, '').replace(/\s*```$/, '');
+
+      return JSON.parse(clean);
+    }
+
+    // ─── Card rendering helpers ───
+    function pips(score) {
+      return [1,2,3,4,5].map(i =>
+        `<div class="pip${i <= score ? ' filled' : ''}"></div>`
+      ).join('');
+    }
+
+    function scoreRows(scores) {
+      const labels = {
+        glow:         'Glow / Finish',
+        blendability: 'Blendability',
+        shadeRange:   'Shade Range',
+        longevity:    'Longevity'
+      };
+      return Object.entries(scores).map(([k, v]) => {
+        const label = labels[k] || k;
+        const pct   = Math.round((v / 5) * 100);
+        return `
+          <div class="score-row">
+            <div class="score-label">${label}</div>
+            <div class="score-track"><div class="score-fill" data-score="${pct}"></div></div>
+            <div class="score-pips">${pips(v)}</div>
+          </div>`;
+      }).join('');
+    }
+
+    function buildCard(product, type, category, verdict) {
+      const vClass = verdict === 'approved' ? 'approved' : 'dud';
+      const vIcon  = verdict === 'approved' ? '✓' : '✕';
+      const vText  = verdict === 'approved' ? 'Dupe Approved' : 'Dud';
+      const verdictHTML = type === 'dupe'
+        ? `<div class="verdict ${vClass}"><span class="verdict-icon">${vIcon}</span> ${vText}</div>`
+        : '';
+
+      return `
+        <div class="card-flip ${type}">
+          <div class="card-inner">
+
+            <div class="card card-front">
+              <div class="category-tag">${escHtml(category)}</div>
+              <div class="card-brand">${escHtml(product.brand)}</div>
+              <div class="card-name">${escHtml(product.name)}</div>
+              <div class="card-price">$${product.price}</div>
+              <div class="scores">${scoreRows(product.scores)}</div>
+              <div class="flip-hint">Tap for verdict <span class="flip-icon">&#x21BA;</span></div>
+            </div>
+
+            <div class="card card-back">
+              <div class="back-product">
+                <div class="back-brand">${escHtml(product.brand)}</div>
+                <div class="back-name">${escHtml(product.name)}</div>
+              </div>
+              <div class="miyas-take">
+                <div class="miyas-take-label">Miya's Take</div>
+                <p>&ldquo;${escHtml(product.review)}&rdquo;</p>
+              </div>
+              ${verdictHTML}
+              <div class="flip-hint">Tap to go back <span class="flip-icon">&#x21BA;</span></div>
+            </div>
+
+          </div>
+        </div>`;
+    }
+
+    function renderResult(data, query) {
+      const { category, luxury, dupe, verdict } = data;
+
+      resultMain.innerHTML = `
+        <div class="comparison">
+          <div class="comparison-header">
+            <div class="comparison-title">${escHtml(category)}</div>
+            <div class="vs-badge">VS</div>
+          </div>
+          <div class="cards-row">
+            ${buildCard(luxury, 'luxury', category, verdict)}
+            ${buildCard(dupe,   'dupe',   category, verdict)}
+          </div>
+        </div>`;
+
+      resultSection.style.display = 'block';
+
+      // Attach flip interactions
+      resultMain.querySelectorAll('.card-flip').forEach(el => {
+        el.addEventListener('click', () => el.classList.toggle('flipped'));
+      });
+
+      // Animate score bars (two rAF frames to ensure paint before transition)
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          resultMain.querySelectorAll('.score-fill[data-score]').forEach(el => {
+            el.style.width = el.dataset.score + '%';
+          });
+        });
+      });
+
+      // Scroll to result
+      resultSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function renderError(msg) {
+      resultMain.innerHTML = `
+        <div class="error-state">
+          <p>Something went wrong</p>
+          <p>${escHtml(msg)}</p>
+        </div>`;
+      resultSection.style.display = 'block';
+      resultSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function setLoading(loading) {
+      searchBtn.disabled = loading;
+      searchBtn.textContent = loading ? 'Finding…' : 'Find My Dupe';
+
+      if (loading) {
+        resultMain.innerHTML = `
+          <div class="loading-state">
+            <div class="loading-dots">
+              <span></span><span></span><span></span>
+            </div>
+            <div class="loading-text">Searching for your dupe…</div>
+          </div>`;
+        resultSection.style.display = 'block';
+        resultSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+
+    function escHtml(str) {
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
   </script>
 
 </body>
