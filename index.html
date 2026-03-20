@@ -449,6 +449,121 @@
 
     .verdict-icon { font-size: 1rem; line-height: 1; }
 
+    /* ─── Savings Calculator ─── */
+    .savings-section {
+      max-width: 1200px;
+      margin: 0 auto 5rem;
+      padding: 0 2rem;
+    }
+
+    .savings-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 3rem 2.5rem;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2.5rem;
+    }
+
+    .savings-totals {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 2rem;
+      width: 100%;
+      max-width: 640px;
+    }
+
+    .savings-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      text-align: center;
+    }
+
+    .savings-col-label {
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--warm-gray);
+    }
+
+    .savings-col-total {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.6rem;
+      font-weight: 600;
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+
+    .savings-col.luxury-col .savings-col-total { color: var(--charcoal); }
+    .savings-col.dupe-col   .savings-col-total { color: var(--approved); }
+
+    .savings-col-sub {
+      font-size: 0.72rem;
+      color: var(--warm-gray);
+      font-weight: 400;
+    }
+
+    .savings-vs {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--parchment);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      color: var(--warm-gray);
+      flex-shrink: 0;
+    }
+
+    .savings-divider {
+      width: 100%;
+      max-width: 640px;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .savings-callout {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.6rem;
+      text-align: center;
+    }
+
+    .savings-callout-amount {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3.5rem, 8vw, 5.5rem);
+      font-weight: 600;
+      color: var(--accent);
+      line-height: 1;
+      letter-spacing: -0.03em;
+    }
+
+    .savings-callout-line {
+      font-size: 0.88rem;
+      color: var(--warm-gray);
+      font-weight: 400;
+      line-height: 1.5;
+      max-width: 340px;
+    }
+
+    @media (max-width: 700px) {
+      .savings-section { padding: 0 1.25rem; }
+      .savings-card    { padding: 2rem 1.5rem; gap: 2rem; }
+      .savings-col-total { font-size: 2rem; }
+    }
+
     /* ─── Footer ─── */
     footer {
       text-align: center;
@@ -907,6 +1022,40 @@
     </div>
 
   </main>
+
+  <!-- Savings Calculator -->
+  <div class="divider" style="max-width:1200px;margin:0 auto 1.5rem;padding:0 2rem;">
+    <div class="divider-line"></div>
+    <div class="divider-label">Dupe Savings Calculator</div>
+    <div class="divider-line"></div>
+  </div>
+
+  <section class="savings-section">
+    <div class="savings-card">
+
+      <div class="savings-totals">
+        <div class="savings-col luxury-col">
+          <div class="savings-col-label">All Luxury</div>
+          <div class="savings-col-total">$136</div>
+          <div class="savings-col-sub">CT + NARS + Armani</div>
+        </div>
+        <div class="savings-vs">VS</div>
+        <div class="savings-col dupe-col">
+          <div class="savings-col-label">All Dupes</div>
+          <div class="savings-col-total">$31</div>
+          <div class="savings-col-sub">e.l.f. + Flower Beauty + L'Oréal</div>
+        </div>
+      </div>
+
+      <div class="savings-divider"></div>
+
+      <div class="savings-callout">
+        <div class="savings-callout-amount">$105</div>
+        <div class="savings-callout-line">That's how much you'd save by buying all the dupes — enough for a whole new haul.</div>
+      </div>
+
+    </div>
+  </section>
 
   <!-- Footer -->
   <footer>
