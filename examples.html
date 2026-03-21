@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Miya's Picks — Dupe or Dud</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream:      #f5f5f5;
+      --parchment:  #eeeeee;
+      --stone:      #e0e0e0;
+      --warm-gray:  #767676;
+      --charcoal:   #222222;
+      --ink:        #000000;
+      --accent:     #e2001a;
+      --accent-lt:  #fce8ea;
+      --approved:   #1a7a3c;
+      --approved-lt:#e6f4ec;
+      --dud:        #9b0000;
+      --dud-lt:     #fce8e8;
+      --card-bg:    #ffffff;
+      --border:     #e0e0e0;
+      --radius-sm:  4px;
+      --radius-md:  8px;
+      --radius-lg:  12px;
+      --shadow:     0 2px 12px rgba(0,0,0,.06), 0 1px 3px rgba(0,0,0,.04);
+      --shadow-hover: 0 8px 32px rgba(0,0,0,.12), 0 2px 8px rgba(0,0,0,.06);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: repeating-linear-gradient(
+        180deg,
+        #000000 0px,
+        #000000 90px,
+        #ffffff 90px,
+        #ffffff 180px
+      );
+      color: var(--charcoal);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── Header ─── */
+    header {
+      background: var(--card-bg);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+
+    .site-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--ink);
+      letter-spacing: 0.02em;
+    }
+
+    .site-logo span { color: var(--accent); }
+
+    .header-nav-link {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--charcoal);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+      padding-bottom: 1px;
+    }
+
+    .header-nav-link:hover {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+    }
+
+    /* ─── Hero ─── */
+    .hero {
+      text-align: center;
+      padding: 5rem 2rem 3.5rem;
+      max-width: 720px;
+      margin: 0 auto;
+      background: #ffffff;
+    }
+
+    .hero-eyebrow {
+      display: inline-block;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      padding: 0.3em 1em;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.4rem, 4.5vw, 3.6rem);
+      line-height: 1.1;
+      color: var(--ink);
+      margin-bottom: 1.25rem;
+      letter-spacing: -0.01em;
+    }
+
+    .hero h1 em { color: var(--accent); font-style: italic; }
+
+    .hero p {
+      font-size: 1.05rem;
+      line-height: 1.75;
+      color: var(--warm-gray);
+      font-weight: 300;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    /* ─── Divider ─── */
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      max-width: 1200px;
+      margin: 0 auto 0.5rem;
+      padding: 0 2rem;
+      background: #ffffff;
+    }
+
+    .divider-line { flex: 1; height: 1px; background: var(--border); }
+
+    .divider-label {
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--warm-gray);
+      white-space: nowrap;
+    }
+
+    /* ─── Main layout ─── */
+    main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem 6rem;
+      background: #ffffff;
+    }
+
+    /* ─── Comparison pair ─── */
+    .comparison { margin-bottom: 4rem; }
+
+    .comparison-header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 1.75rem;
+    }
+
+    .comparison-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      color: var(--ink);
+      font-style: italic;
+    }
+
+    .vs-badge {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--charcoal);
+      color: #fff;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .cards-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      align-items: start;
+    }
+
+    /* ─── Flip container ─── */
+    .card-flip {
+      perspective: 1200px;
+      cursor: pointer;
+    }
+
+    .card-inner {
+      display: grid;
+      grid-template: 1fr / 1fr;
+      transform-style: preserve-3d;
+      transition: transform 0.65s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .card-flip.flipped .card-inner { transform: rotateY(180deg); }
+
+    /* ─── Card shared ─── */
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      box-shadow: var(--shadow);
+      position: relative;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+    }
+
+    .card-front { grid-area: 1 / 1; }
+    .card-back  { grid-area: 1 / 1; transform: rotateY(180deg); }
+
+    .card-flip:hover .card { box-shadow: var(--shadow-hover); }
+
+    .card-flip.luxury .card-front::before {
+      content: 'ORIGINAL';
+      position: absolute;
+      top: 1.25rem; right: 1.25rem;
+      font-size: 0.55rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      color: var(--warm-gray);
+      background: var(--parchment);
+      border: 1px solid var(--border);
+      padding: 0.25em 0.7em;
+    }
+
+    .card-flip.dupe .card-front::before {
+      content: 'DUPE';
+      position: absolute;
+      top: 1.25rem; right: 1.25rem;
+      font-size: 0.55rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      color: var(--accent);
+      background: var(--accent-lt);
+      border: 1px solid var(--accent);
+      padding: 0.25em 0.7em;
+    }
+
+    /* ─── Category tag ─── */
+    .category-tag {
+      display: inline-block;
+      font-size: 0.6rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--charcoal);
+      border: 1px solid var(--border);
+      padding: 0.3em 0.9em;
+      margin-bottom: 1.1rem;
+    }
+
+    /* ─── Card body ─── */
+    .card-brand {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.3rem;
+    }
+
+    .card-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--ink);
+      line-height: 1.3;
+      margin-bottom: 0.5rem;
+    }
+
+    .card-price {
+      font-size: 1.5rem;
+      font-weight: 300;
+      color: var(--charcoal);
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+    }
+
+    /* ─── Scores ─── */
+    .scores {
+      border-top: 1px solid var(--border);
+      padding-top: 1.25rem;
+      margin-bottom: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .score-row {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .score-label {
+      font-size: 0.72rem;
+      font-weight: 500;
+      color: var(--warm-gray);
+      letter-spacing: 0.04em;
+      min-width: 100px;
+    }
+
+    .score-track {
+      flex: 1;
+      height: 4px;
+      background: var(--stone);
+      border-radius: 100px;
+      overflow: hidden;
+    }
+
+    .score-fill {
+      height: 100%;
+      background: var(--accent);
+      border-radius: 100px;
+      width: 0;
+      transition: width 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .score-pips { display: flex; gap: 4px; flex-shrink: 0; }
+
+    .pip {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--stone);
+    }
+
+    .pip.filled { background: var(--accent); }
+
+    /* ─── Flip hint ─── */
+    .flip-hint {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.45rem;
+      font-size: 0.63rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--warm-gray);
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+      user-select: none;
+    }
+
+    .flip-icon {
+      font-size: 0.85rem;
+      opacity: 0.55;
+      display: inline-block;
+      transition: transform 0.3s ease;
+    }
+
+    .card-flip:hover .flip-icon { transform: rotate(45deg); }
+
+    /* ─── Back face ─── */
+    .card-back {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .back-product { display: flex; flex-direction: column; gap: 0.15rem; }
+
+    .back-brand {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .back-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--ink);
+      line-height: 1.3;
+    }
+
+    /* ─── Miya's Take ─── */
+    .miyas-take {
+      background: var(--parchment);
+      border-radius: var(--radius-md);
+      padding: 1rem 1.1rem;
+    }
+
+    .miyas-take-label {
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.4rem;
+    }
+
+    .miyas-take p {
+      font-size: 0.82rem;
+      line-height: 1.65;
+      color: var(--charcoal);
+      font-style: italic;
+    }
+
+    /* ─── Verdict ─── */
+    .verdict {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1rem;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .verdict.approved { background: var(--approved-lt); color: var(--approved); border: 1px solid var(--approved); }
+    .verdict.dud      { background: var(--dud-lt);      color: var(--dud);      border: 1px solid var(--dud); }
+    .verdict-icon { font-size: 1rem; line-height: 1; }
+
+    /* ─── Savings Calculator ─── */
+    .savings-section {
+      max-width: 1200px;
+      margin: 0 auto 5rem;
+      padding: 0 2rem;
+      background: #ffffff;
+    }
+
+    .savings-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 3rem 2.5rem;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2.5rem;
+    }
+
+    .savings-totals {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 2rem;
+      width: 100%;
+      max-width: 640px;
+    }
+
+    .savings-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      text-align: center;
+    }
+
+    .savings-col-label {
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--warm-gray);
+    }
+
+    .savings-col-total {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.6rem;
+      font-weight: 600;
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+
+    .savings-col.luxury-col .savings-col-total { color: var(--charcoal); }
+    .savings-col.dupe-col   .savings-col-total { color: var(--approved); }
+
+    .savings-col-sub { font-size: 0.72rem; color: var(--warm-gray); }
+
+    .savings-vs {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      background: var(--parchment);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      color: var(--warm-gray);
+      flex-shrink: 0;
+    }
+
+    .savings-divider {
+      width: 100%;
+      max-width: 640px;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .savings-callout {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.6rem;
+      text-align: center;
+    }
+
+    .savings-callout-amount {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3.5rem, 8vw, 5.5rem);
+      font-weight: 600;
+      color: var(--accent);
+      line-height: 1;
+      letter-spacing: -0.03em;
+    }
+
+    .savings-callout-line {
+      font-size: 0.88rem;
+      color: var(--warm-gray);
+      max-width: 340px;
+      line-height: 1.5;
+    }
+
+    /* ─── Footer ─── */
+    footer {
+      text-align: center;
+      padding: 2.5rem 2rem;
+      border-top: 1px solid var(--border);
+      background: var(--card-bg);
+    }
+
+    footer p { font-size: 0.78rem; color: var(--warm-gray); letter-spacing: 0.04em; }
+    footer strong { color: var(--accent); font-weight: 600; }
+
+    /* ─── Responsive ─── */
+    @media (max-width: 700px) {
+      .cards-row { grid-template-columns: 1fr; }
+      .hero { padding: 3rem 1.5rem 2.5rem; }
+      main { padding: 0 1.25rem 4rem; }
+      header { padding: 0 1.25rem; }
+      .savings-section { padding: 0 1.25rem; }
+      .savings-card { padding: 2rem 1.5rem; gap: 2rem; }
+      .savings-col-total { font-size: 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="header-inner">
+      <div class="site-logo">Dupe <span>or</span> Dud</div>
+      <a href="index.html" class="header-nav-link">&larr; Home</a>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-eyebrow">Miya's Picks</div>
+    <h1>Spend smart, <em>not less.</em></h1>
+    <p>Five honest comparisons — scored on glow, blendability, shade range, and longevity. Tap any card to see the verdict.</p>
+  </section>
+
+  <!-- Cards will go here -->
+
+  <!-- Footer -->
+  <footer>
+    <p>All scores are Miya's independent assessments. No sponsorships. <strong>Dupe or Dud</strong> — because your wallet deserves an honest answer.</p>
+  </footer>
+
+  <script>
+    document.querySelectorAll('.card-flip').forEach(flip => {
+      flip.addEventListener('click', () => flip.classList.toggle('flipped'));
+    });
+
+    const fills = document.querySelectorAll('.score-fill[data-score]');
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          setTimeout(() => { el.style.width = el.dataset.score + '%'; }, 120);
+          obs.unobserve(el);
+        }
+      });
+    }, { threshold: 0.3 });
+    fills.forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
